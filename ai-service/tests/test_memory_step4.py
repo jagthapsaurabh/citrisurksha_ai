@@ -8,10 +8,9 @@ import os
 import sys
 import tempfile
 
-os.makedirs("/home/user/.tmp", exist_ok=True)
 import uuid
 
-os.environ.setdefault("MODEL_STORE", tempfile.mkdtemp(prefix="cs-ms4-", dir="/home/user/.tmp"))
+os.environ.setdefault("MODEL_STORE", tempfile.mkdtemp(prefix="cs-ms4-"))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 import numpy as np

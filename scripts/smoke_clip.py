@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "ai-service"))
-os.environ["MODEL_STORE"] = tempfile.mkdtemp(prefix="cs-smoke-clip-", dir="/home/user/.tmp")
+os.environ["MODEL_STORE"] = tempfile.mkdtemp(prefix="cs-smoke-clip-")
 os.environ["CLIP_ENABLED"] = "true"
 
 from PIL import Image  # noqa: E402

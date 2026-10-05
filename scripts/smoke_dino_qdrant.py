@@ -17,8 +17,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "ai-service"))
 
-os.environ["MODEL_STORE"] = tempfile.mkdtemp(prefix="cs-smoke-ms-", dir="/home/user/.tmp")
-os.environ["QDRANT_PATH"] = tempfile.mkdtemp(prefix="cs-smoke-q-", dir="/home/user/.tmp")
+os.environ["MODEL_STORE"] = tempfile.mkdtemp(prefix="cs-smoke-ms-")
+os.environ["QDRANT_PATH"] = tempfile.mkdtemp(prefix="cs-smoke-q-")
 os.environ["DINOV2_ENABLED"] = "true"
 os.environ["MEMORY_ENABLED"] = "true"
 

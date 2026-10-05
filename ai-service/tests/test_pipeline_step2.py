@@ -5,9 +5,8 @@ import os
 import sys
 import tempfile
 
-os.makedirs("/home/user/.tmp", exist_ok=True)
 
-os.environ.setdefault("MODEL_STORE", tempfile.mkdtemp(prefix="cs-modelstore-", dir="/home/user/.tmp"))
+os.environ.setdefault("MODEL_STORE", tempfile.mkdtemp(prefix="cs-modelstore-"))
 os.environ.setdefault("DINOV2_ENABLED", "false")  # tests never download weights
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 

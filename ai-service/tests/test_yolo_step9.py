@@ -4,9 +4,8 @@ import os
 import sys
 import tempfile
 
-os.makedirs("/home/user/.tmp", exist_ok=True)
 
-STORE = tempfile.mkdtemp(prefix="cs-ms9-", dir="/home/user/.tmp")
+STORE = tempfile.mkdtemp(prefix="cs-ms9-")
 os.environ["MODEL_STORE"] = STORE
 os.environ.setdefault("DINOV2_ENABLED", "false")
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))

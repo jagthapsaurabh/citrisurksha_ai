@@ -3,9 +3,8 @@ import os
 import sys
 import tempfile
 
-os.makedirs("/home/user/.tmp", exist_ok=True)
 
-os.environ.setdefault("MODEL_STORE", tempfile.mkdtemp(prefix="cs-ms6-", dir="/home/user/.tmp"))
+os.environ.setdefault("MODEL_STORE", tempfile.mkdtemp(prefix="cs-ms6-"))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from app.calibration import make_record, suggest_thresholds, validate_record

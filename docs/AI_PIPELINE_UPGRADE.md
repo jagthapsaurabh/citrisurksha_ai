@@ -1,6 +1,6 @@
 # CitriSuraksha AI — Multi-Stage Vision Pipeline Upgrade
 
-Status: **Steps 1–9 complete** (audit, OpenCV + YOLO11, validation harness, DINOv2 + Qdrant visual memory, OpenCLIP secondary signal, calibration format + evidence/audit trail, dataset versioning + governed model registry, frozen-test evaluation + comparison-gated deploys).
+Status: **Steps 1–12 complete — full target pipeline implemented and validated** (audit, OpenCV + YOLO11, validation harness, DINOv2 + Qdrant visual memory, OpenCLIP secondary signal, calibration format + evidence/audit trail, dataset versioning + governed model registry, frozen-test evaluation + comparison-gated deploys, optional MLflow + bootstrap YOLO training, admin governance UI, active learning, production validation pack).
 Steps 9–12 (MLflow wrapper, admin upgrades, active learning) follow in the same incremental style.
 
 ## Target architecture
@@ -336,8 +336,33 @@ screens clean. Tests cover lift-based tuning (correlated signal wins, too-little
 guard), signal extraction, cluster recovery (3+3+1 vectors -> two candidate clusters +
 singleton), and pipeline->store wiring.
 
-## Next step
+## Step 12 — what changed (production validation pack)
 
-Step 12: production validation pack - latency budget report per stage, load snapshot,
-security checklist run, and a release runbook tying train -> evaluate -> compare ->
-approve -> deploy -> monitor together.
+- `ai-service/app/perf.py` (new) — per-stage latency budgets (`BUDGET_<STAGE>`,
+  `LATENCY_TOTAL_BUDGET_S` env-overridable) and `check_budget()`; skipped stages never
+  fail, over-budget stages do.
+- `scripts/latency_report.py` — warm-up + steady-state per-stage report over sample
+  images → `scripts/latency_report.json`; current run: **all within budget** (totals
+  0.004–0.04 s steady state on CPU; first-call loads excluded by warm-up).
+- `scripts/security_check.py` — runnable checklist, **7/7 PASS**: no tracked Firebase
+  admin/service-account files; no real `.env` tracked (templates allowed); 20 MB upload
+  cap enforced; path traversal blocked; admin & farmer APIs return 401 unauthenticated;
+  `/pipeline/info` leaks no credentials or internal paths. Non-zero exit blocks release.
+  Wired into the test suites (backend runs it as a test).
+- `docs/RELEASE_RUNBOOK.md` — the governed release path: intake → review queue →
+  dataset version → train (classifier + YOLO) → frozen evaluation → compare → approve →
+  gated deploy → monitor → rollback, with exact endpoints and the security gate.
+
+Environment variables added: `BUDGET_*` stage budgets, `LATENCY_TOTAL_BUDGET_S`.
+Dependencies added: none. Database migration: none.
+
+Validation: ai-service 56/56, backend 9/9 (incl. security checklist test), compileall
+clean; latency report `OVER-BUDGET FILES: none`; admin build/tsc validated in step 10/11
+rounds and unchanged since.
+
+## Programme summary
+
+All twelve steps delivered: honest multi-stage detection (quality → YOLO11 → CNN →
+DINOv2+Qdrant → OpenCLIP → decision engine with `I don't know`), governed datasets with
+frozen test sets, evaluation-gated deploy/rollback, optional MLflow, bootstrap detector
+training, active learning, latency + security validation, and a release runbook.

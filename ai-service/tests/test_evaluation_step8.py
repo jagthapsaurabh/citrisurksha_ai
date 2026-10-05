@@ -4,9 +4,8 @@ import os
 import sys
 import tempfile
 
-os.makedirs("/home/user/.tmp", exist_ok=True)
 
-STORE = tempfile.mkdtemp(prefix="cs-ms8-", dir="/home/user/.tmp")
+STORE = tempfile.mkdtemp(prefix="cs-ms8-")
 os.environ["MODEL_STORE"] = STORE
 os.environ.setdefault("DINOV2_ENABLED", "false")
 os.environ["STRICT_20_CLASS_TRAINING"] = "false"   # dev experiment with 3 classes

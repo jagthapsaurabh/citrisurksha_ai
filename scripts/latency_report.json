@@ -1,0 +1,242 @@
+{
+  "images": 4,
+  "over_budget": [],
+  "rows": [
+    {
+      "file": "leafminer_closeup.jpg",
+      "decision": "uncertain",
+      "timings": {
+        "opencv_quality": 0.023,
+        "detector": 0.017,
+        "legacy_cnn": 0.012,
+        "dino_qdrant": 0.0,
+        "openclip": 0.0,
+        "decision": 0.0,
+        "total": 0.052
+      },
+      "budget": {
+        "stages": {
+          "opencv_quality": {
+            "measured": 0.023,
+            "budget": 0.1,
+            "ok": true,
+            "skipped": false
+          },
+          "detector": {
+            "measured": 0.017,
+            "budget": 1.5,
+            "ok": true,
+            "skipped": false
+          },
+          "legacy_cnn": {
+            "measured": 0.012,
+            "budget": 0.5,
+            "ok": true,
+            "skipped": false
+          },
+          "dino_qdrant": {
+            "measured": 0.0,
+            "budget": 1.0,
+            "ok": true,
+            "skipped": false
+          },
+          "openclip": {
+            "measured": 0.0,
+            "budget": 0.8,
+            "ok": true,
+            "skipped": false
+          },
+          "decision": {
+            "measured": 0.0,
+            "budget": 0.05,
+            "ok": true,
+            "skipped": false
+          }
+        },
+        "total": {
+          "measured": 0.052,
+          "budget": 3.0,
+          "ok": true
+        },
+        "within_budget": true
+      }
+    },
+    {
+      "file": "leafminer_mines.png",
+      "decision": "uncertain",
+      "timings": {
+        "opencv_quality": 0.016,
+        "detector": 0.007,
+        "legacy_cnn": 0.002,
+        "dino_qdrant": 0.0,
+        "openclip": 0.0,
+        "decision": 0.0,
+        "total": 0.024
+      },
+      "budget": {
+        "stages": {
+          "opencv_quality": {
+            "measured": 0.016,
+            "budget": 0.1,
+            "ok": true,
+            "skipped": false
+          },
+          "detector": {
+            "measured": 0.007,
+            "budget": 1.5,
+            "ok": true,
+            "skipped": false
+          },
+          "legacy_cnn": {
+            "measured": 0.002,
+            "budget": 0.5,
+            "ok": true,
+            "skipped": false
+          },
+          "dino_qdrant": {
+            "measured": 0.0,
+            "budget": 1.0,
+            "ok": true,
+            "skipped": false
+          },
+          "openclip": {
+            "measured": 0.0,
+            "budget": 0.8,
+            "ok": true,
+            "skipped": false
+          },
+          "decision": {
+            "measured": 0.0,
+            "budget": 0.05,
+            "ok": true,
+            "skipped": false
+          }
+        },
+        "total": {
+          "measured": 0.024,
+          "budget": 3.0,
+          "ok": true
+        },
+        "within_budget": true
+      }
+    },
+    {
+      "file": "orchard.jpg",
+      "decision": "uncertain",
+      "timings": {
+        "opencv_quality": 0.013,
+        "detector": 0.01,
+        "legacy_cnn": 0.01,
+        "dino_qdrant": 0.0,
+        "openclip": 0.0,
+        "decision": 0.0,
+        "total": 0.034
+      },
+      "budget": {
+        "stages": {
+          "opencv_quality": {
+            "measured": 0.013,
+            "budget": 0.1,
+            "ok": true,
+            "skipped": false
+          },
+          "detector": {
+            "measured": 0.01,
+            "budget": 1.5,
+            "ok": true,
+            "skipped": false
+          },
+          "legacy_cnn": {
+            "measured": 0.01,
+            "budget": 0.5,
+            "ok": true,
+            "skipped": false
+          },
+          "dino_qdrant": {
+            "measured": 0.0,
+            "budget": 1.0,
+            "ok": true,
+            "skipped": false
+          },
+          "openclip": {
+            "measured": 0.0,
+            "budget": 0.8,
+            "ok": true,
+            "skipped": false
+          },
+          "decision": {
+            "measured": 0.0,
+            "budget": 0.05,
+            "ok": true,
+            "skipped": false
+          }
+        },
+        "total": {
+          "measured": 0.034,
+          "budget": 3.0,
+          "ok": true
+        },
+        "within_budget": true
+      }
+    },
+    {
+      "file": "psyllid_nymphs.jpg",
+      "decision": "uncertain",
+      "timings": {
+        "opencv_quality": 0.002,
+        "detector": 0.001,
+        "legacy_cnn": 0.001,
+        "dino_qdrant": 0.0,
+        "openclip": 0.0,
+        "decision": 0.0,
+        "total": 0.004
+      },
+      "budget": {
+        "stages": {
+          "opencv_quality": {
+            "measured": 0.002,
+            "budget": 0.1,
+            "ok": true,
+            "skipped": false
+          },
+          "detector": {
+            "measured": 0.001,
+            "budget": 1.5,
+            "ok": true,
+            "skipped": false
+          },
+          "legacy_cnn": {
+            "measured": 0.001,
+            "budget": 0.5,
+            "ok": true,
+            "skipped": false
+          },
+          "dino_qdrant": {
+            "measured": 0.0,
+            "budget": 1.0,
+            "ok": true,
+            "skipped": false
+          },
+          "openclip": {
+            "measured": 0.0,
+            "budget": 0.8,
+            "ok": true,
+            "skipped": false
+          },
+          "decision": {
+            "measured": 0.0,
+            "budget": 0.05,
+            "ok": true,
+            "skipped": false
+          }
+        },
+        "total": {
+          "measured": 0.004,
+          "budget": 3.0,
+          "ok": true
+        },
+        "within_budget": true
+      }
+    }
+  ]
+}

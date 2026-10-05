@@ -4,9 +4,8 @@ import os
 import sys
 import tempfile
 
-os.makedirs("/home/user/.tmp", exist_ok=True)
-os.environ["MODEL_STORE"] = tempfile.mkdtemp(prefix="cs-ms11-", dir="/home/user/.tmp")
-os.environ["QDRANT_PATH"] = tempfile.mkdtemp(prefix="cs-q11-", dir="/home/user/.tmp")
+os.environ["MODEL_STORE"] = tempfile.mkdtemp(prefix="cs-ms11-")
+os.environ["QDRANT_PATH"] = tempfile.mkdtemp(prefix="cs-q11-")
 os.environ.setdefault("DINOV2_ENABLED", "false")
 os.environ.setdefault("CLIP_ENABLED", "false")
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
