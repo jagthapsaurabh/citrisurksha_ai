@@ -287,8 +287,28 @@ Current limitations: bootstrap boxes are full-image (localisation quality arrive
 expert boxes); real YOLO training run not executed here (no verified images yet).
 Steps 10-12 remain: admin studio UI for datasets/evals/models, active learning queue.
 
+## Step 10 — what changed (admin panel upgrades)
+
+- `admin-panel/src/screens/AIModels.tsx` rewritten as **AI Model Governance**:
+  active/production panel with one-click **Rollback**; model table with status chips,
+  dataset link, val metrics, frozen-eval badge and comparison verdict; per-row actions
+  **Evaluate (frozen test) / Compare vs production / Approve / Reject / Deploy / Details**
+  (deploy is server-side gated on frozen eval + comparison=deploy).
+  **Dataset Versions** panel (list + immutable build from verified images) and
+  **YOLO11 bootstrap detector training** panel.
+- `admin-panel/src/screens/FarmerUploads.tsx`:
+  **Priority review queue** (active learning) listing unreviewed scans ordered by the
+  pipeline's `review_priority`, and an **AI evidence panel** per detection showing
+  decision, quality, per-source signals, DINOv2+Qdrant memory (top1/similarity/support/
+  margin) and OpenCLIP score.
+- Backend `GET /admin/ai/review-queue` (priority-sorted unreviewed detections).
+- `admin-panel/src/api.ts`: new governance calls (datasets, evaluate, compare, status,
+  deploy, rollback, train-yolo, review-queue). `src/vite-env.d.ts` added.
+
+Validation: admin `vite build` clean; targeted `tsc --strict` over the edited screens
+clean; backend 8/8 tests pass.
+
 ## Next step
 
-Step 10: admin panel upgrades - dataset list, model registry UI with evaluate/compare/
-deploy/rollback buttons, evidence viewer for farmer uploads, active-learning priority
-queue.
+Step 11: active-learning loop closure - auto-prioritisation rules tuning from review
+outcomes, plus unknown-image clustering so novel pests surface as candidate classes.

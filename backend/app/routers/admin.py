@@ -384,6 +384,26 @@ def list_ai_feed_data(source_type: str | None = None, db: Session = Depends(get_
     rows = q.limit(500).all()
     return [{"id": r.id, "source_type": r.source_type, "title": r.title, "content": r.content[:500], "url": r.url, "pest_id": r.pest_id, "created_at": r.created_at} for r in rows]
 
+@router.get("/ai/review-queue")
+def review_queue(limit: int = 50, db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
+    """Active-learning priority queue: unreviewed detections ordered by the
+    pipeline's review_priority (low confidence, unknown, model disagreement)."""
+    rows = (db.query(Detection)
+            .filter(Detection.admin_status.in_(["unreviewed", "pending"]))
+            .order_by(Detection.created_at.desc()).limit(500).all())
+    out = []
+    for r in rows:
+        ai = r.ai_response or {}
+        out.append({
+            "id": r.id, "image_url": image_url_for_path(r.image_path),
+            "predicted_name": r.predicted_name, "confidence": r.confidence,
+            "decision": ai.get("decision"), "review_priority": ai.get("review_priority") or 0.0,
+            "user_name": getattr(r.user, "name", None), "created_at": r.created_at,
+        })
+    out.sort(key=lambda x: x["review_priority"], reverse=True)
+    return {"queue": out[: max(1, min(200, limit))]}
+
+
 @router.get("/ai/datasets")
 def list_dataset_versions(db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
     from ..models import DatasetVersion

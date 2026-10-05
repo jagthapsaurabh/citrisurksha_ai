@@ -71,4 +71,14 @@ export const api = {
   train: (dataset_version: string, base_model: string) => req('/admin/ai/train', { method: 'POST', body: JSON.stringify({ dataset_version, base_model, epochs: 3, batch_size: 8 }) }),
   jobs: () => req('/admin/ai/jobs'),
   aiModels: () => req('/admin/ai/models'),
+  // upgrade steps 7-10: datasets, governed models, active learning
+  aiDatasets: () => req('/admin/ai/datasets'),
+  createDataset: (version: string, notes?: string) => req('/admin/ai/datasets', { method: 'POST', body: JSON.stringify({ version, notes }) }),
+  evaluateModel: (id: string) => req(`/admin/ai/models/${id}/evaluate`, { method: 'POST', body: '{}' }),
+  compareModel: (id: string) => req(`/admin/ai/models/${id}/compare`, { method: 'POST', body: '{}' }),
+  setModelStatus: (id: string, status: string) => req(`/admin/ai/models/${id}/status`, { method: 'POST', body: JSON.stringify({ status }) }),
+  deployModel: (id: string) => req(`/admin/ai/models/${id}/deploy`, { method: 'POST', body: '{}' }),
+  rollbackModel: (modelId?: string) => req('/admin/ai/models/rollback', { method: 'POST', body: JSON.stringify(modelId ? { model_id: modelId } : {}) }),
+  trainYolo: (payload: any) => req('/admin/ai/train-yolo', { method: 'POST', body: JSON.stringify(payload) }),
+  reviewQueue: () => req('/admin/ai/review-queue'),
 };
