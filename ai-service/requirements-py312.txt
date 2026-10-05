@@ -1,0 +1,11 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.19
+Pillow==11.0.0
+pydantic-settings==2.7.1
+requests==2.32.3
+numpy==2.2.1
+torch==2.5.1
+torchvision==0.20.1
+scikit-learn==1.6.0
+orjson==3.10.15

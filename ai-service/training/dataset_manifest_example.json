@@ -1,0 +1,11 @@
+{
+  "dataset_version": "2026-06-30",
+  "classes": ["citrus-psyllid", "citrus-leaf-miner", "citrus-aphid", "citrus-whitefly"],
+  "splits": {
+    "train": [
+      {"image_uri": "s3://citrisurksha-images/training/psyllid_0001.jpg", "label": "citrus-psyllid", "stage": "adult"}
+    ],
+    "val": [],
+    "test": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "836422824170",
+    "project_id": "citrisuraksha-ai",
+    "storage_bucket": "citrisuraksha-ai.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836422824170:android:4c2cda6eaf786d8864e793",
+        "android_client_info": {
+          "package_name": "com.citrisurksha.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfnXOcs91OsNIKFO0NZDYsPP5i2awpMfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

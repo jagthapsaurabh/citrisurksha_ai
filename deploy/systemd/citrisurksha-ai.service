@@ -1,0 +1,17 @@
+[Unit]
+Description=CitriSurksha AI Service
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/citrisurksha
+Environment=MODEL_STORE=/var/www/citrisurksha/ai-service/model-store
+Environment=FORCE_CPU=true
+Environment=TORCH_NUM_THREADS=8
+ExecStart=/var/www/citrisurksha/.venv-ai/bin/uvicorn app.main:app --app-dir ai-service --host 127.0.0.1 --port 8100 --workers 1
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

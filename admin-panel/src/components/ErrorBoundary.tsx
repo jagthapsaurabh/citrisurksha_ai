@@ -1,0 +1,2 @@
+import React from 'react';
+export class ErrorBoundary extends React.Component<{children:React.ReactNode},{error?:Error}>{state:{error?:Error}={};static getDerivedStateFromError(error:Error){return{error}}componentDidCatch(error:Error){console.error('Admin UI error',error)}render(){if(this.state.error)return <main className="content"><div className="panel"><h2>Something went wrong</h2><p className="error">{this.state.error.message}</p><button onClick={()=>this.setState({error:undefined})}>Try again</button></div></main>;return this.props.children}}

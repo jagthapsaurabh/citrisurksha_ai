@@ -1,0 +1,23 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.19
+Pillow==11.0.0
+pydantic-settings==2.7.1
+requests==2.32.3
+numpy==2.2.1
+# Python 3.13 does not support torch 2.5.x. torch 2.6.0 + torchvision 0.21.0 work on Python 3.13 Windows.
+torch==2.6.0
+torchvision==0.21.0
+scikit-learn==1.6.0
+orjson==3.10.15
+# --- Multi-stage vision pipeline (upgrade step 2): OpenCV quality gate + YOLO11 detector.
+# Headless OpenCV: no GUI/libGL requirement on servers. ultralytics installed with
+# its own deps; keep opencv-python (GUI) OUT of the environment to avoid libGL errors.
+opencv-python-headless==5.0.0.93
+ultralytics==8.4.173
+ultralytics-thop==2.2.2
+# Vector memory for verified-image DINOv2 embeddings (local embedded mode by default;
+# set QDRANT_URL for a self-hosted server). Stores embeddings ONLY - never pest knowledge.
+qdrant-client==1.19.1
+# OpenCLIP zero-shot secondary signal (open model + open "openai" weights; never primary)
+open_clip_torch==3.3.0

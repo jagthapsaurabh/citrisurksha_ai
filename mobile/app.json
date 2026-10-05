@@ -1,0 +1,97 @@
+{
+  "expo": {
+    "name": "CitriSurksha",
+    "slug": "citrisurksha",
+    "scheme": "citrisurksha",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "CitriSurksha uses the camera to capture citrus plant and pest photos for AI detection.",
+        "NSPhotoLibraryUsageDescription": "CitriSurksha uses your photo library so you can upload citrus plant and pest images for AI detection.",
+        "NSPhotoLibraryAddUsageDescription": "CitriSurksha may save pest detection report images when you choose to export them.",
+        "NSUserNotificationsUsageDescription": "CitriSurksha sends pest alerts, training review updates and farming reminders.",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        },
+        "EXUpdatesEnabled": false,
+        "EXUpdatesCheckOnLaunch": "NEVER",
+        "EXUpdatesLaunchWaitMs": 0,
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
+      },
+      "bundleIdentifier": "com.citrisurksha.app",
+      "googleServicesFile": "./GoogleService-Info.plist"
+    },
+    "android": {
+      "package": "com.citrisurksha.app",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.VIBRATE"
+      ],
+      "edgeToEdgeEnabled": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo.png",
+        "backgroundColor": "#050805"
+      },
+      "googleServicesFile": "./google-services.json"
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "minSdkVersion": 24,
+            "usesCleartextTraffic": true
+          },
+          "ios": {
+            "deploymentTarget": "15.1"
+          }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "CitriSurksha needs photo library access so you can upload citrus plant and pest images for AI detection.",
+          "cameraPermission": "CitriSurksha needs camera access so you can capture citrus plant and pest images for AI detection.",
+          "microphonePermission": false
+        }
+      ],
+      "expo-notifications",
+      "@react-native-firebase/app",
+      "@react-native-firebase/messaging"
+    ],
+    "sdkVersion": "54.0.0",
+    "newArchEnabled": true,
+    "icon": "./assets/logo.png",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#050805"
+    },
+    "notification": {
+      "icon": "./assets/notification-icon.png",
+      "color": "#116530",
+      "androidMode": "default",
+      "androidCollapsedTitle": "CitriSurksha"
+    },
+    "updates": {
+      "enabled": false,
+      "checkAutomatically": "NEVER",
+      "fallbackToCacheTimeout": 0
+    }
+  }
+}

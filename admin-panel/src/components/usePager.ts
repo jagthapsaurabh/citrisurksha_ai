@@ -1,0 +1,2 @@
+import { useMemo, useState } from 'react';
+export function usePager<T>(items:T[], pageSize=10){const[query,setQuery]=useState('');const[page,setPage]=useState(1);const filtered=useMemo(()=>items.filter((x:any)=>JSON.stringify(x).toLowerCase().includes(query.toLowerCase())),[items,query]);const pages=Math.max(1,Math.ceil(filtered.length/pageSize));const safePage=Math.min(page,pages);const data=filtered.slice((safePage-1)*pageSize,safePage*pageSize);return{query,setQuery,page:safePage,setPage,pages,data,total:filtered.length}}

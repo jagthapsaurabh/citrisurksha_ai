@@ -1,0 +1,724 @@
+1. Asian Citrus Psyllid 
+Names 
+English Asian Citrus Psyllid 
+Hindi एशियन साइट्रस शसल्ला 
+Marathi श िंबू शसल्ला 
+Scientific Name Diaphorina citri 
+Overview 
+English: 
+Asian Citrus Psyllid is one of the economically important citrus pests in India. 
+ 
+श िंदी: 
+एशियन साइट्रस शसल्ला भारत के प्रमुख साइट्रस कीट् िं में से एक  ै। 
+ 
+मराठी: 
+श िंबू शसल्ला  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+Tiny brown insect (3–4 mm), wings held at 45°, yellow-orange nymphs on tender flush. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Sap-sucking insect and vector of Citrus Greening (HLB). Causes curling of tender leaves, 
+stunted flush and reduced yield. 
+Life Cycle 
+Egg → Immature stage (nymph/larva) → Adult. Multiple generations may occur under warm 
+conditions. 
+Monitoring 
+Inspect young flush and the underside of leaves every week. Record infestation level and 
+capture photographs for AI datasets. 
+Integrated Pest Management 
+Regular monitoring, remove infected shoots, conserve Tamarixia radiata, neem oil, use 
+registered systemic insecticides only when ETL is crossed. 
+AI Detection Features 
+- Images of eggs, immature stages and adults 
+- Healthy vs damaged leaves 
+- Different lighting, backgrounds and mobile cameras 
+- Bounding boxes and segmentation masks 
+JSON Metadata 
+{ 
+  "common_name":"Asian Citrus Psyllid", 
+  "scientific_name":"Diaphorina citri", 
+  "crop":"Citrus", 
+  "country":"India" 
+} 
+ 
+2. Citrus Leaf Miner 
+Names 
+English Citrus Leaf Miner 
+Hindi साइट्रस  ीफ माइनर 
+Marathi श िंबू िान खाणारी अळी 
+Scientific Name Phyllocnistis citrella 
+Overview 
+English: 
+Citrus Leaf Miner is one of the economically important citrus pests in India. 
+ 
+श िंदी: 
+साइट्रस  ीफ माइनर भारत के प्रमुख साइट्रस कीट् िं में से एक  ै। 
+ 
+मराठी: 
+श िंबू िान खाणारी अळी  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+Silvery winding mines on young leaves, tiny moth, translucent larvae inside leaves. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Larvae create serpentine mines in young leaves causing curling and poor growth. 
+Life Cycle 
+Egg → Immature stage (nymph/larva) → Adult. Multiple generations may occur under warm 
+conditions. 
+Monitoring 
+Inspect young flush and the underside of leaves every week. Record infestation level and 
+capture photographs for AI datasets. 
+Integrated Pest Management 
+Prune damaged flush, avoid excess nitrogen, conserve parasitoids, neem products, 
+registered insecticides if severe. 
+AI Detection Features 
+- Images of eggs, immature stages and adults 
+- Healthy vs damaged leaves 
+- Different lighting, backgrounds and mobile cameras 
+- Bounding boxes and segmentation masks 
+JSON Metadata 
+{ 
+  "common_name":"Citrus Leaf Miner", 
+  "scientific_name":"Phyllocnistis citrella", 
+  "crop":"Citrus", 
+  "country":"India" 
+} 
+ 
+3. Citrus Blackfly 
+Names 
+English Citrus Blackfly 
+Hindi साइट्रस ब्लैक फ्लाई 
+Marathi श िंबू काळी िािंढरी मािी 
+Scientific Name Aleurocanthus woglumi 
+Overview 
+English: 
+Citrus Blackfly is one of the economically important citrus pests in India. 
+ 
+श िंदी: 
+साइट्रस ब्लैक फ्लाई भारत के प्रमुख साइट्रस कीट् िं में से एक  ै। 
+ 
+मराठी: 
+श िंबू काळी िािंढरी मािी  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+Black spiny immature stages on leaf underside, adults dark with white wax. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Sap sucking leads to honeydew and black sooty mold. 
+Life Cycle 
+Egg → Immature stage (nymph/larva) → Adult. Multiple generations may occur under warm 
+conditions. 
+Monitoring 
+Inspect young flush and the underside of leaves every week. Record infestation level and 
+capture photographs for AI datasets. 
+Integrated Pest Management 
+Monitor leaf undersides, encourage predators, horticultural oil and approved insecticides 
+when required. 
+AI Detection Features 
+- Images of eggs, immature stages and adults 
+- Healthy vs damaged leaves 
+- Different lighting, backgrounds and mobile cameras 
+- Bounding boxes and segmentation masks 
+JSON Metadata 
+{ 
+  "common_name":"Citrus Blackfly", 
+  "scientific_name":"Aleurocanthus woglumi", 
+  "crop":"Citrus", 
+  "country":"India" 
+} 
+ 
+4. Citrus Whitefly 
+Names 
+English Citrus Whitefly 
+Hindi साइट्रस व्हाइट्फ्लाई 
+Marathi श िंबू िािंढरी मािी 
+Scientific Name Dialeurodes citri 
+Overview 
+English: 
+Citrus Whitefly is one of the economically important citrus pests in India. 
+ 
+श िंदी: 
+साइट्रस व्हाइट्फ्लाई भारत के प्रमुख साइट्रस कीट् िं में से एक  ै। 
+ 
+मराठी: 
+श िंबू िािंढरी मािी  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+Tiny white powdery adults, flat nymphs beneath leaves. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Produces honeydew causing sooty mold and weakening trees. 
+Life Cycle 
+Egg → Immature stage (nymph/larva) → Adult. Multiple generations may occur under warm 
+conditions. 
+Monitoring 
+Inspect young flush and the underside of leaves every week. Record infestation level and 
+capture photographs for AI datasets. 
+Integrated Pest Management 
+Yellow sticky traps, neem oil, biological control, registered insecticides if infestation is high. 
+AI Detection Features 
+- Images of eggs, immature stages and adults 
+- Healthy vs damaged leaves 
+- Different lighting, backgrounds and mobile cameras 
+- Bounding boxes and segmentation masks 
+JSON Metadata 
+{ 
+  "common_name":"Citrus Whitefly", 
+  "scientific_name":"Dialeurodes citri", 
+  "crop":"Citrus", 
+  "country":"India" 
+} 
+ 
+5. Brown Citrus Aphid 
+Names 
+English Brown Citrus Aphid 
+Hindi भूरी साइट्रस माहू 
+Marathi तिशकरी श िंबू मावा 
+Scientific Name Toxoptera citricida 
+Overview 
+English: 
+Brown Citrus Aphid is one of the economically important citrus pests in India. 
+ 
+श िंदी: 
+भूरी साइट्रस माहू भारत के प्रमुख साइट्रस कीट् िं में से एक  ै। 
+ 
+मराठी: 
+तिशकरी श िंबू मावा  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+Glossy dark-brown aphids clustered on tender shoots. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Heavy sap loss and transmission of citrus tristeza virus. 
+Life Cycle 
+Egg → Immature stage (nymph/larva) → Adult. Multiple generations may occur under warm 
+conditions. 
+Monitoring 
+Inspect young flush and the underside of leaves every week. Record infestation level and 
+capture photographs for AI datasets. 
+Integrated Pest Management 
+Inspect new flush, conserve ladybird beetles, neem formulations and selective insecticides if 
+necessary. 
+AI Detection Features 
+- Images of eggs, immature stages and adults 
+- Healthy vs damaged leaves 
+- Different lighting, backgrounds and mobile cameras 
+- Bounding boxes and segmentation masks 
+JSON Metadata 
+{ 
+  "common_name":"Brown Citrus Aphid", 
+  "scientific_name":"Toxoptera citricida", 
+  "crop":"Citrus", 
+  "country":"India" 
+} 
+ 
+ 
+6. Cotton Aphid 
+English Cotton Aphid 
+Hindi कॉट्न एशफड 
+Marathi कािूस मावा 
+Scientific Name Aphis gossypii 
+Overview 
+Cotton Aphid is an important citrus pest found in India. 
+ 
+श िंदी: कॉट्न एशफड साइट्रस की म त्विूणण कीट्  ै। 
+ 
+मराठी: कािूस मावा  ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+Small soft-bodied aphid that sucks sap from tender shoots and leaves. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Leaf curling, sticky honeydew, sooty mold. 
+Life Cycle 
+Egg → Immature stage → Adult. Multiple generations under suitable conditions. 
+Monitoring 
+Inspect young leaves, shoots and fruits weekly. Record infestation and capture images. 
+Integrated Pest Management 
+Inspect new flush, conserve ladybird beetles, use neem and selective insecticides. 
+AI Detection Features 
+Collect images of eggs, immature stages, adults, damage symptoms and healthy plant parts 
+under different lighting. 
+JSON Metadata 
+{"common_name":"Cotton Aphid","scientific_name":"Aphis gossypii","crop":"Citrus"} 
+ 
+7. Citrus Mealybug 
+English Citrus Mealybug 
+Hindi साइट्रस शम ीबर्ग 
+Marathi श िंबू शम ीबर्ग 
+Scientific Name Planococcus citri 
+Overview 
+Citrus Mealybug is an important citrus pest found in India. 
+ 
+श िंदी: साइट्रस शम ीबर्ग साइट्रस की म त्विूणण कीट्  ै। 
+ 
+मराठी: श िंबू शम ीबर्ग  ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+White wax-covered sap-sucking insect found on leaves, shoots and fruits. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Honeydew, sooty mold, poor fruit quality. 
+Life Cycle 
+Egg → Immature stage → Adult. Multiple generations under suitable conditions. 
+Monitoring 
+Inspect young leaves, shoots and fruits weekly. Record infestation and capture images. 
+Integrated Pest Management 
+Prune infested twigs, encourage predators, neem oil, registered insecticides if needed. 
+AI Detection Features 
+Collect images of eggs, immature stages, adults, damage symptoms and healthy plant parts 
+under different lighting. 
+JSON Metadata 
+{"common_name":"Citrus Mealybug","scientific_name":"Planococcus citri","crop":"Citrus"} 
+ 
+8. California Red Scale 
+English California Red Scale 
+Hindi क ैश फ शनणया रेड स्के  
+Marathi क ॅश फ शनणया रेड स्के  
+Scientific Name Aonidiella aurantii 
+Overview 
+California Red Scale is an important citrus pest found in India. 
+ 
+श िंदी: क ैश फ शनणया रेड स्के  साइट्रस की म त्विूणण कीट्  ै। 
+ 
+मराठी: क ॅश फ शनणया रेड स्के   ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+Armored scale insect attacking fruits, leaves and branches. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Yellow spots, fruit blemishes, twig weakening. 
+Life Cycle 
+Egg → Immature stage → Adult. Multiple generations under suitable conditions. 
+Monitoring 
+Inspect young leaves, shoots and fruits weekly. Record infestation and capture images. 
+Integrated Pest Management 
+Monitor regularly, horticultural oil, conserve parasitoids. 
+AI Detection Features 
+Collect images of eggs, immature stages, adults, damage symptoms and healthy plant parts 
+under different lighting. 
+JSON Metadata 
+{"common_name":"California Red Scale","scientific_name":"Aonidiella 
+aurantii","crop":"Citrus"} 
+ 
+9. Purple Scale 
+English Purple Scale 
+Hindi ििण  स्के  
+Marathi जािंभळी स्के  
+Scientific Name Lepidosaphes beckii 
+Overview 
+Purple Scale is an important citrus pest found in India. 
+ 
+श िंदी: ििण  स्के  साइट्रस की म त्विूणण कीट्  ै। 
+ 
+मराठी: जािंभळी स्के   ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+Scale insect commonly found on leaves and fruits. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Yellowing leaves, reduced vigor and fruit quality. 
+Life Cycle 
+Egg → Immature stage → Adult. Multiple generations under suitable conditions. 
+Monitoring 
+Inspect young leaves, shoots and fruits weekly. Record infestation and capture images. 
+Integrated Pest Management 
+Pruning, orchard sanitation, horticultural oils and biological control. 
+AI Detection Features 
+Collect images of eggs, immature stages, adults, damage symptoms and healthy plant parts 
+under different lighting. 
+JSON Metadata 
+{"common_name":"Purple Scale","scientific_name":"Lepidosaphes beckii","crop":"Citrus"} 
+ 
+10. Green Shield Scale 
+English Green Shield Scale 
+Hindi ग्रीन िील्ड स्के  
+Marathi श रवी स्के  
+Scientific Name Coccus viridis 
+Overview 
+Green Shield Scale is an important citrus pest found in India. 
+ 
+श िंदी: ग्रीन िील्ड स्के  साइट्रस की म त्विूणण कीट्  ै। 
+ 
+मराठी: श रवी स्के   ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड आ े. 
+Identification 
+Soft scale producing abundant honeydew. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Sticky leaves, black sooty mold and reduced photosynthesis. 
+Life Cycle 
+Egg → Immature stage → Adult. Multiple generations under suitable conditions. 
+Monitoring 
+Inspect young leaves, shoots and fruits weekly. Record infestation and capture images. 
+Integrated Pest Management 
+Encourage natural enemies, prune heavily infested branches, neem-based sprays. 
+AI Detection Features 
+Collect images of eggs, immature stages, adults, damage symptoms and healthy plant parts 
+under different lighting. 
+JSON Metadata 
+{"common_name":"Green Shield Scale","scientific_name":"Coccus viridis","crop":"Citrus"} 
+ 
+11. Citrus Red Mite 
+English Citrus Red Mite 
+Hindi साइट्रस रेड माइट् 
+Marathi  ा  क ळी 
+Scientific Name Panonychus citri 
+Overview 
+English: 
+Citrus Red Mite is an economically important citrus pest found in India. 
+ 
+श िंदी: 
+साइट्रस रेड माइट् भारत में िाया जाने वा ा एक म त्विूणण साइट्रस कीट्/माइट्  ै। 
+ 
+मराठी: 
+ ा  क ळी  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड/क ळी आ े. 
+Identification 
+Tiny red mite feeding on leaf sap. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Leaf bronzing, yellowing and reduced photosynthesis. 
+Life Cycle 
+Egg → Immature stage → Adult. Several generations may occur each year under favorable 
+weather. 
+Monitoring 
+Inspect leaves and fruits weekly. Record infestation level and capture field images for AI 
+training. 
+Integrated Pest Management 
+Monitor leaf undersides, conserve predatory mites, use miticides only when required. 
+AI Detection Features 
+Capture images of all life stages, healthy and damaged leaves, fruits, multiple angles, lighting 
+conditions and devices. 
+JSON Metadata 
+{"common_name":"Citrus Red Mite","scientific_name":"Panonychus 
+citri","crop":"Citrus","country":"India"} 
+ 
+12. Oriental Spider Mite 
+English Oriental Spider Mite 
+Hindi ओररएिंट्  स्पाइडर माइट् 
+Marathi िूवेकडी  क ळी 
+Scientific Name Eutetranychus orientalis 
+Overview 
+English: 
+Oriental Spider Mite is an economically important citrus pest found in India. 
+ 
+श िंदी: 
+ओररएिंट्  स्पाइडर माइट् भारत में िाया जाने वा ा एक म त्विूणण साइट्रस कीट्/माइट्  ै। 
+ 
+मराठी: 
+िूवेकडी  क ळी  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड/क ळी आ े. 
+Identification 
+Spider mite causing chlorotic patches on citrus leaves. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Leaf discoloration, premature leaf fall. 
+Life Cycle 
+Egg → Immature stage → Adult. Several generations may occur each year under favorable 
+weather. 
+Monitoring 
+Inspect leaves and fruits weekly. Record infestation level and capture field images for AI 
+training. 
+Integrated Pest Management 
+Avoid dusty conditions, encourage natural enemies, apply registered miticides if needed. 
+AI Detection Features 
+Capture images of all life stages, healthy and damaged leaves, fruits, multiple angles, lighting 
+conditions and devices. 
+JSON Metadata 
+{"common_name":"Oriental Spider Mite","scientific_name":"Eutetranychus 
+orientalis","crop":"Citrus","country":"India"} 
+ 
+13. Citrus Rust Mite 
+English Citrus Rust Mite 
+Hindi साइट्रस रस्ट माइट् 
+Marathi श िंबू रस्ट माइट् 
+Scientific Name Phyllocoptruta oleivora 
+Overview 
+English: 
+Citrus Rust Mite is an economically important citrus pest found in India. 
+ 
+श िंदी: 
+साइट्रस रस्ट माइट् भारत में िाया जाने वा ा एक म त्विूणण साइट्रस कीट्/माइट्  ै। 
+ 
+मराठी: 
+श िंबू रस्ट माइट्  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड/क ळी आ े. 
+Identification 
+Microscopic mite attacking leaves and fruits. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Fruit russeting and dull fruit appearance. 
+Life Cycle 
+Egg → Immature stage → Adult. Several generations may occur each year under favorable 
+weather. 
+Monitoring 
+Inspect leaves and fruits weekly. Record infestation level and capture field images for AI 
+training. 
+Integrated Pest Management 
+Monitor fruits regularly, maintain orchard health, use appropriate miticides when ETL is 
+exceeded. 
+AI Detection Features 
+Capture images of all life stages, healthy and damaged leaves, fruits, multiple angles, lighting 
+conditions and devices. 
+JSON Metadata 
+{"common_name":"Citrus Rust Mite","scientific_name":"Phyllocoptruta 
+oleivora","crop":"Citrus","country":"India"} 
+ 
+14. Yellow Citrus Thrips 
+English Yellow Citrus Thrips 
+Hindi ये   साइट्रस शिप्स 
+Marathi शिवळी फ ु शकडी 
+Scientific Name Scirtothrips dorsalis 
+Overview 
+English: 
+Yellow Citrus Thrips is an economically important citrus pest found in India. 
+ 
+श िंदी: 
+ये   साइट्रस शिप्स भारत में िाया जाने वा ा एक म त्विूणण साइट्रस कीट्/माइट्  ै। 
+ 
+मराठी: 
+शिवळी फ ु शकडी  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड/क ळी आ े. 
+Identification 
+Tiny yellow thrips feeding on young leaves and fruits. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Leaf curling and fruit scarring. 
+Life Cycle 
+Egg → Immature stage → Adult. Several generations may occur each year under favorable 
+weather. 
+Monitoring 
+Inspect leaves and fruits weekly. Record infestation level and capture field images for AI 
+training. 
+Integrated Pest Management 
+Blue/yellow sticky traps, weed management, conserve predators, selective insecticides. 
+AI Detection Features 
+Capture images of all life stages, healthy and damaged leaves, fruits, multiple angles, lighting 
+conditions and devices. 
+JSON Metadata 
+{"common_name":"Yellow Citrus Thrips","scientific_name":"Scirtothrips 
+dorsalis","crop":"Citrus","country":"India"} 
+ 
+15. Citrus Thrips 
+English Citrus Thrips 
+Hindi साइट्रस शिप्स 
+Marathi श िंबू शिप्स 
+Scientific Name Scirtothrips citri 
+Overview 
+English: 
+Citrus Thrips is an economically important citrus pest found in India. 
+ 
+श िंदी: 
+साइट्रस शिप्स भारत में िाया जाने वा ा एक म त्विूणण साइट्रस कीट्/माइट्  ै। 
+ 
+मराठी: 
+श िंबू शिप्स  ा भारताती  श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड/क ळी आ े. 
+Identification 
+Thrips damaging tender foliage and young fruits. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Silvering, scarring and distorted fruits. 
+Life Cycle 
+Egg → Immature stage → Adult. Several generations may occur each year under favorable 
+weather. 
+Monitoring 
+Inspect leaves and fruits weekly. Record infestation level and capture field images for AI 
+training. 
+Integrated Pest Management 
+Regular monitoring, orchard sanitation, biological control and selective insecticides. 
+AI Detection Features 
+Capture images of all life stages, healthy and damaged leaves, fruits, multiple angles, lighting 
+conditions and devices. 
+JSON Metadata 
+{"common_name":"Citrus Thrips","scientific_name":"Scirtothrips 
+citri","crop":"Citrus","country":"India"} 
+16. Fruit Sucking Moth 
+English Fruit Sucking Moth 
+Hindi फ  चूसने वा ा ितिंर्गा 
+Marathi फळरस ि षण करणारा ितिंर्ग 
+Scientific Name Eudocima materna 
+Overview 
+English: 
+Fruit Sucking Moth is an economically important citrus pest affecting yield and fruit quality. 
+ 
+श िंदी: 
+फ  चूसने वा ा ितिंर्गा साइट्रस फस  िं का एक म त्विूणण कीट्  ै ज  उत्पादन और र्गुणवत्ता क  प्रभाशवत 
+करता  ै। 
+ 
+मराठी: 
+फळरस ि षण करणारा ितिंर्ग  ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड असून उत्पादन व र्गुणवत्तेवर 
+िररणाम करत . 
+Identification 
+Large nocturnal moth that pierces ripening citrus fruits to suck juice. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Pierced fruits, juice leakage, rotting and secondary fungal infection. 
+Life Cycle 
+Egg → Larva/Caterpillar or Maggot → Pupa → Adult. Development varies with weather 
+conditions. 
+Monitoring 
+Inspect fruits, stems and branches weekly. Record pest incidence and capture field images 
+for AI datasets. 
+Integrated Pest Management 
+Collect and destroy damaged fruits, use fruit bagging where practical, light traps and 
+integrated pest management. 
+AI Detection Features 
+Collect images of eggs, larvae, pupae, adults, entry holes, damaged fruits, bark symptoms, 
+healthy plants, and different environmental conditions. 
+JSON Metadata 
+{"common_name":"Fruit Sucking Moth","scientific_name":"Eudocima 
+materna","crop":"Citrus","country":"India"} 
+ 
+17. Lemon Butterfly 
+English Lemon Butterfly 
+Hindi नीिंबू शतत ी 
+Marathi श िंबू फ ु िाखरू 
+Scientific Name Papilio demoleus 
+Overview 
+English: 
+Lemon Butterfly is an economically important citrus pest affecting yield and fruit quality. 
+ 
+श िंदी: 
+नीिंबू शतत ी साइट्रस फस  िं का एक म त्विूणण कीट्  ै ज  उत्पादन और र्गुणवत्ता क  प्रभाशवत करता  ै। 
+ 
+मराठी: 
+श िंबू फ ु िाखरू  ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड असून उत्पादन व र्गुणवत्तेवर िररणाम करत . 
+Identification 
+Caterpillars feed aggressively on citrus leaves, especially in young orchards. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Severe defoliation, reduced plant growth and delayed establishment. 
+Life Cycle 
+Egg → Larva/Caterpillar or Maggot → Pupa → Adult. Development varies with weather 
+conditions. 
+Monitoring 
+Inspect fruits, stems and branches weekly. Record pest incidence and capture field images 
+for AI datasets. 
+Integrated Pest Management 
+Hand-pick larvae, conserve natural enemies, use biological control and approved 
+insecticides only if needed. 
+AI Detection Features 
+Collect images of eggs, larvae, pupae, adults, entry holes, damaged fruits, bark symptoms, 
+healthy plants, and different environmental conditions. 
+JSON Metadata 
+{"common_name":"Lemon Butterfly","scientific_name":"Papilio 
+demoleus","crop":"Citrus","country":"India"} 
+ 
+18. Bark Eating Caterpillar 
+English Bark Eating Caterpillar 
+Hindi छा  खाने वा ी इल्ली 
+Marathi सा  खाणारी अळी 
+Scientific Name Indarbela quadrinotata 
+Overview 
+English: 
+Bark Eating Caterpillar is an economically important citrus pest affecting yield and fruit 
+quality. 
+ 
+श िंदी: 
+छा  खाने वा ी इल्ली साइट्रस फस  िं का एक म त्विूणण कीट्  ै ज  उत्पादन और र्गुणवत्ता क  प्रभाशवत 
+करता  ै। 
+ 
+मराठी: 
+सा  खाणारी अळी  ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड असून उत्पादन व र्गुणवत्तेवर िररणाम करत . 
+Identification 
+Caterpillar bores into bark and branches while feeding internally. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Holes in bark, webbing with frass, branch weakening and dieback. 
+Life Cycle 
+Egg → Larva/Caterpillar or Maggot → Pupa → Adult. Development varies with weather 
+conditions. 
+Monitoring 
+Inspect fruits, stems and branches weekly. Record pest incidence and capture field images 
+for AI datasets. 
+Integrated Pest Management 
+Remove webbing, insert wire into tunnels, prune badly affected branches and maintain 
+orchard sanitation. 
+AI Detection Features 
+Collect images of eggs, larvae, pupae, adults, entry holes, damaged fruits, bark symptoms, 
+healthy plants, and different environmental conditions. 
+JSON Metadata 
+{"common_name":"Bark Eating Caterpillar","scientific_name":"Indarbela 
+quadrinotata","crop":"Citrus","country":"India"} 
+ 
+19. Citrus Trunk Borer 
+English Citrus Trunk Borer 
+Hindi साइट्रस तना छेदक 
+Marathi श िंबू ख ड ि खरणारा भुिंर्गा 
+Scientific Name Anoplophora versteegi 
+Overview 
+English: 
+Citrus Trunk Borer is an economically important citrus pest affecting yield and fruit quality. 
+ 
+श िंदी: 
+साइट्रस तना छेदक साइट्रस फस  िं का एक म त्विूणण कीट्  ै ज  उत्पादन और र्गुणवत्ता क  प्रभाशवत करता 
+ ै। 
+ 
+मराठी: 
+श िंबू ख ड ि खरणारा भुिंर्गा  ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड असून उत्पादन व र्गुणवत्तेवर िररणाम 
+करत . 
+Identification 
+Wood-boring beetle attacking trunk and major branches. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Round exit holes, frass, branch drying and reduced tree vigor. 
+Life Cycle 
+Egg → Larva/Caterpillar or Maggot → Pupa → Adult. Development varies with weather 
+conditions. 
+Monitoring 
+Inspect fruits, stems and branches weekly. Record pest incidence and capture field images 
+for AI datasets. 
+Integrated Pest Management 
+Regular inspection, destroy infested wood, protect trunk and use recommended 
+management practices. 
+AI Detection Features 
+Collect images of eggs, larvae, pupae, adults, entry holes, damaged fruits, bark symptoms, 
+healthy plants, and different environmental conditions. 
+JSON Metadata 
+{"common_name":"Citrus Trunk Borer","scientific_name":"Anoplophora 
+versteegi","crop":"Citrus","country":"India"} 
+ 
+20. Oriental Fruit Fly 
+English Oriental Fruit Fly 
+Hindi ओररएिंट्  फ्र ूट् फ्लाई 
+Marathi फळ मािी 
+Scientific Name Bactrocera dorsalis 
+Overview 
+English: 
+Oriental Fruit Fly is an economically important citrus pest affecting yield and fruit quality. 
+ 
+श िंदी: 
+ओररएिंट्  फ्र ूट् फ्लाई साइट्रस फस  िं का एक म त्विूणण कीट्  ै ज  उत्पादन और र्गुणवत्ता क  प्रभाशवत 
+करता  ै। 
+ 
+मराठी: 
+फळ मािी  ा श िंबूवर्गीय शिकािंवरी  म त्त्वाचा शकड असून उत्पादन व र्गुणवत्तेवर िररणाम करत . 
+Identification 
+Adult flies lay eggs inside fruits; maggots feed internally. 
+Host Plants 
+Orange, Lemon, Lime, Mandarin, Sweet Lime and Grapefruit. 
+Damage Symptoms 
+Fruit punctures, rotting, premature fruit drop and market losses. 
+Life Cycle 
+Egg → Larva/Caterpillar or Maggot → Pupa → Adult. Development varies with weather 
+conditions. 
+Monitoring 
+Inspect fruits, stems and branches weekly. Record pest incidence and capture field images 
+for AI datasets. 
+Integrated Pest Management 
+Collect fallen fruits, methyl eugenol traps, orchard sanitation, bait sprays and integrated 
+management. 
+AI Detection Features 
+Collect images of eggs, larvae, pupae, adults, entry holes, damaged fruits, bark symptoms, 
+healthy plants, and different environmental conditions. 
+JSON Metadata 
+{"common_name":"Oriental Fruit Fly","scientific_name":"Bactrocera 
+dorsalis","crop":"Citrus","country":"India"} 
+ 
