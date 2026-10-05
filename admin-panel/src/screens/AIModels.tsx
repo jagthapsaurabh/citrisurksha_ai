@@ -16,10 +16,12 @@ export function AIModels() {
   const [busy, setBusy] = useState('');
   const [newDs, setNewDs] = useState('');
   const [yoloDs, setYoloDs] = useState('');
+  const [clusters, setClusters] = useState<any>({ clusters: [] });
 
   const load = useCallback(() => {
     api.aiModels().then(setData).catch((e: any) => setErr(e.message));
     api.aiDatasets().then((r: any) => setDatasets(r.datasets || [])).catch(() => undefined);
+    api.unknownClusters().then(setClusters).catch(() => undefined);
   }, []);
   useEffect(() => { load(); }, [load]);
 
@@ -85,6 +87,16 @@ export function AIModels() {
               {busy === 'ds' ? 'Building…' : '📦 Build dataset'}
             </button>
           </div>
+        </div>
+        <div className="panel"><h3>🕵️ Unknown pest candidates (visual clusters)</h3>
+          <p className="muted">Unidentified scans are embedded and grouped; coherent clusters may be novel pests. {(clusters.total_unknowns ?? 0)} unknowns stored.</p>
+          {(clusters.clusters || []).slice(0, 6).map((c: any, i: number) => <p key={i}>
+            <b>Cluster {i + 1}</b> — {c.size} similar images {c.candidate_new_class ? <span style={{ background: '#d81b60', color: '#fff', borderRadius: 999, padding: '2px 8px', fontSize: 10, fontWeight: 900 }}>CANDIDATE NEW CLASS</span> : ''}<br />
+            <small className="muted">AI guesses: {Object.entries(c.top_candidate_votes || {}).map(([k, v]) => `${k}×${v}`).join(', ') || 'none'}</small></p>)}
+          {(clusters.clusters || []).length === 0 && <p className="muted">No clusters yet.</p>}
+          <button disabled={!!busy} onClick={() => act('tune', async () => { const r = await api.tunePriority(); return `Priority proposal: ${JSON.stringify(r.proposed || r.note)}`; })}>
+            {busy === 'tune' ? 'Tuning…' : '️ Tune review-priority weights from reviews'}
+          </button>
         </div>
         <div className="panel"><h3>YOLO11 Detector (bootstrap boxes)</h3>
           <p className="muted">Trains the detector stage from verified images with full-image bootstrap boxes. Result lands in Model Versions as <i>testing</i>.</p>

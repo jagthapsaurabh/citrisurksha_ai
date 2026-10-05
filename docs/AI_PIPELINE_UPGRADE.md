@@ -308,7 +308,36 @@ Steps 10-12 remain: admin studio UI for datasets/evals/models, active learning q
 Validation: admin `vite build` clean; targeted `tsc --strict` over the edited screens
 clean; backend 8/8 tests pass.
 
+## Step 11 — what changed (active-learning loop closure)
+
+- `ai-service/app/active_learning.py` (new):
+  - **Priority tuning from review outcomes**: calibration records (evidence + expert
+    label) tell us when the AI was wrong; per-signal lift `P(wrong|signal)-P(wrong)`
+    over low_conf / small_margin / disagreement / weak_support / novel_image /
+    clip_conflict produces a proposed weight vector (`POST /active-learning/tune`).
+    Proposals only; a human copies accepted weights into `ACTIVE_LEARNING_WEIGHTS`,
+    which `decision.review_priority` then uses as an additive boost.
+  - **Unknown-image clustering**: crops the pipeline cannot identify are stored as
+    DINOv2 embeddings in a dedicated Qdrant collection (`unknown_pest_candidates`);
+    greedy leader clustering (`CLUSTER_SIM`, `CLUSTER_MIN`) surfaces coherent groups
+    as **candidate new pest classes** (`GET /active-learning/unknown-clusters`).
+- `app/pipeline.py` stores an unknown crop embedding (image sha + top candidate)
+  whenever the decision is unknown/uncertain.
+- Backend: `GET /admin/ai/unknown-clusters`, `POST /admin/ai/tune-priority`
+  (auto-builds the calibration export from reviewed detections).
+- Admin UI (AIModels): unknown-cluster panel with "CANDIDATE NEW CLASS" badges and a
+  "tune priority weights" action; Farmer Uploads keeps the priority review queue.
+
+Environment variables added: `CLUSTER_SIM`, `CLUSTER_MIN`, `ACTIVE_LEARNING_WEIGHTS`.
+Dependencies added: none. Database migration: none.
+
+Validation: ai-service 53/53, backend 8/8, admin `vite build` + strict `tsc` over edited
+screens clean. Tests cover lift-based tuning (correlated signal wins, too-little-data
+guard), signal extraction, cluster recovery (3+3+1 vectors -> two candidate clusters +
+singleton), and pipeline->store wiring.
+
 ## Next step
 
-Step 11: active-learning loop closure - auto-prioritisation rules tuning from review
-outcomes, plus unknown-image clustering so novel pests surface as candidate classes.
+Step 12: production validation pack - latency budget report per stage, load snapshot,
+security checklist run, and a release runbook tying train -> evaluate -> compare ->
+approve -> deploy -> monitor together.

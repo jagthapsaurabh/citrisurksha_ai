@@ -81,4 +81,6 @@ export const api = {
   rollbackModel: (modelId?: string) => req('/admin/ai/models/rollback', { method: 'POST', body: JSON.stringify(modelId ? { model_id: modelId } : {}) }),
   trainYolo: (payload: any) => req('/admin/ai/train-yolo', { method: 'POST', body: JSON.stringify(payload) }),
   reviewQueue: () => req('/admin/ai/review-queue'),
+  unknownClusters: () => req('/admin/ai/unknown-clusters'),
+  tunePriority: () => req('/admin/ai/tune-priority', { method: 'POST', body: '{}' }),
 };

@@ -162,6 +162,20 @@ def model_compare(payload: dict):
                            important_classes=payload.get("important_classes"))
 
 
+@app.post("/active-learning/tune")
+def active_learning_tune(payload: dict):
+    """Propose review-priority weights from labelled review outcomes."""
+    from .active_learning import tune_priority_weights
+    return tune_priority_weights(payload.get("records") or [])
+
+
+@app.get("/active-learning/unknown-clusters")
+def active_learning_clusters():
+    """Visually coherent groups of unidentified crops = candidate new pests."""
+    from .active_learning import unknown_clusters
+    return unknown_clusters()
+
+
 @app.post("/datasets/build")
 def dataset_build(payload: dict):
     from .datasets import build_dataset

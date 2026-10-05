@@ -384,6 +384,33 @@ def list_ai_feed_data(source_type: str | None = None, db: Session = Depends(get_
     rows = q.limit(500).all()
     return [{"id": r.id, "source_type": r.source_type, "title": r.title, "content": r.content[:500], "url": r.url, "pest_id": r.pest_id, "created_at": r.created_at} for r in rows]
 
+@router.get("/ai/unknown-clusters")
+def unknown_clusters_proxy(_admin: User = Depends(require_admin)):
+    try:
+        r = requests.get(f"{settings.ai_service_url}/active-learning/unknown-clusters", timeout=30)
+        r.raise_for_status()
+        return r.json()
+    except Exception as exc:
+        return {"clusters": [], "total_unknowns": 0, "error": str(exc)}
+
+
+@router.post("/ai/tune-priority")
+def tune_priority_proxy(payload: dict, db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
+    """Feed the calibration export into priority-weight tuning."""
+    from ..calibration import build_calibration_records
+    rows = (db.query(Detection)
+            .filter(Detection.reviewed_by.isnot(None))
+            .order_by(Detection.reviewed_at.desc()).limit(2000).all())
+    records = build_calibration_records(rows)
+    try:
+        r = requests.post(f"{settings.ai_service_url}/active-learning/tune",
+                          json={"records": records}, timeout=60)
+        r.raise_for_status()
+        return r.json()
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"Tuning failed: {exc}") from exc
+
+
 @router.get("/ai/review-queue")
 def review_queue(limit: int = 50, db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
     """Active-learning priority queue: unreviewed detections ordered by the

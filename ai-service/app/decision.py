@@ -156,11 +156,29 @@ def decide(quality: dict, candidates: list[dict], neg_votes: list[Signal],
 
 
 def review_priority(decision: dict) -> float:
-    """Active-learning seed: higher = label this one first."""
+    """Active-learning seed: higher = label this one first. Base rules plus an
+    OPTIONAL tuned boost from ACTIVE_LEARNING_WEIGHTS (a human-reviewed proposal
+    produced by /active-learning/tune - never auto-applied)."""
     base = {"unknown": 0.9, "uncertain": 0.75, "poor_image": 0.2, "non_target_image": 0.1,
             "no_pest_detected": 0.15, "identified": 0.1}[decision["decision"]]
     conf = decision.get("confidence", 0.0)
-    return round(min(1.0, base + (0.25 * (1.0 - conf) if decision["decision"] in ("uncertain", "unknown") else 0.0)), 3)
+    p = base + (0.25 * (1.0 - conf) if decision["decision"] in ("uncertain", "unknown") else 0.0)
+    raw = os.getenv("ACTIVE_LEARNING_WEIGHTS", "").strip()
+    if raw:
+        try:
+            import json as _json
+            weights = _json.loads(raw)
+            cands = decision.get("candidates") or []
+            t1 = float(cands[0].get("score", 0.0)) if cands else 0.0
+            margin = t1 - (float(cands[1].get("score", 0.0)) if len(cands) > 1 else 0.0)
+            sigs = [s for s in (decision.get("evidence") or {}).get("signals", []) if s.get("pest_id")]
+            strong = {s["pest_id"] for s in sigs if not s.get("weak") and s.get("score", 0) >= 0.5}
+            indicators = {"low_conf": t1 < 0.55, "small_margin": margin < 0.08,
+                          "disagreement": len(strong) > 1}
+            p += sum(float(weights.get(k, 0.0)) for k, on in indicators.items() if on)
+        except Exception:
+            pass
+    return round(min(1.0, p), 3)
 
 
 def _out(decision: str, pest_id: str | None, confidence: float, candidates: list, evidence: dict, reason: str) -> dict:

@@ -12,6 +12,7 @@ duplicated here.
 """
 from __future__ import annotations
 
+import hashlib
 import os
 import time
 
@@ -77,6 +78,7 @@ def run_pipeline(content: bytes) -> dict:
     cnn_meta: dict = {}
     memory = None
     clip = None
+    crop_img = None
     cfg = ThresholdConfig.load()
 
     if quality.get("acceptable"):
@@ -139,6 +141,22 @@ def run_pipeline(content: bytes) -> dict:
     dec = decide(quality, candidates, neg_votes, signals, cfg,
                  detector_meta=det_meta, support_count=None)
     timings["decision"] = round(time.perf_counter() - t0, 4)
+
+    # Active learning (step 11): remember what we could not identify so novel
+    # pests surface as clusters of visually similar unknowns.
+    if dec["decision"] in ("unknown", "uncertain") and crop_img is not None:
+        try:
+            from .active_learning import store_unknown
+            from .embeddings import dino_embedder
+            vec, _ = dino_embedder.embed_timed(crop_img)
+            if vec is not None:
+                store_unknown(vec, {
+                    "image_sha": hashlib.sha256(content).hexdigest()[:16],
+                    "top_candidate": dec.get("pest_id"),
+                    "decision": dec["decision"],
+                })
+        except Exception:
+            pass
 
     classes = DEFAULT_CLASSES
     top1 = dec["candidates"][0] if dec["candidates"] else None
