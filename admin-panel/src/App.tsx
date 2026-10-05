@@ -12,6 +12,7 @@ import { FarmerUploads } from './screens/FarmerUploads';
 import { BlogList, BlogForm } from './screens/Blogs';
 import { TrainAI } from './screens/TrainAI';
 import { AIModels } from './screens/AIModels';
+import { DriveStudio } from './screens/DriveStudio';
 import { EventsList, EventForm } from './screens/Events';
 import { CalendarOperationList, CalendarOperationForm } from './screens/CalendarOperation';
 import { FarmerChat } from './screens/FarmerChat';
@@ -47,6 +48,7 @@ function App() {
         <Route path="blogs/add" element={<BlogForm />} />
         <Route path="blogs/:id/edit" element={<BlogForm />} />
         <Route path="train-ai" element={<TrainAI />} />
+        <Route path="drive-studio" element={<DriveStudio />} />
         <Route path="ai-models" element={<AIModels />} />
         <Route path="events" element={<EventsList />} />
         <Route path="events/add" element={<EventForm />} />

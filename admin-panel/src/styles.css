@@ -18,3 +18,30 @@ button:disabled{opacity:.55;cursor:not-allowed}
 .uploadMeta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:8px}.linkBtn{background:#eaf7e4!important;color:#116530!important;padding:7px 10px!important;border-radius:999px!important}.linkBtn:hover{background:#116530!important;color:white!important}
 .premiumLogin{background:linear-gradient(180deg,#ffffff 0%,#f8fff3 100%);border:1px solid rgba(17,101,48,.16)}.loginLogo{width:170px;height:170px;border-radius:32px;object-fit:cover;box-shadow:0 20px 50px rgba(0,0,0,.28);margin-top:-6px}.premiumLogin h1{color:#116530;font-size:30px;margin:12px 0 0}.premiumLogin p{font-weight:900;letter-spacing:1.5px;color:#314b30}.loginPass{background:#fbfff8;border:1px solid #cfe2c9;border-radius:14px;padding-left:12px}.loginPass input{border:0;margin:0;background:transparent}.lockIcon{font-size:18px}.eyeBtn{background:#eaf7e4!important;color:#116530!important;min-width:48px}
 .brandLogo{width:48px;height:48px;border-radius:14px;object-fit:cover;box-shadow:0 8px 20px rgba(0,0,0,.25)}.navBadge{margin-left:auto;background:#ffb000;color:#1b271c;border-radius:999px;min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;padding:0 6px}.split{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:18px;align-items:start}.mobilePreview{position:sticky;top:84px}.mobilePreview iframe{width:100%;height:720px;border:10px solid #111;border-radius:30px;background:white;box-shadow:0 18px 60px #0002}.progress{position:relative;height:26px;background:#edf4e8;border-radius:999px;overflow:hidden;min-width:140px}.progress span{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#116530,#84bd00)}.progress b{position:absolute;inset:0;display:grid;place-items:center;font-size:12px;color:#102}.trainHero{background:linear-gradient(135deg,#0b3d1d,#198754);color:white;border-radius:28px;padding:26px;margin-bottom:18px;box-shadow:var(--shadow)}.trainHero h2{margin:0;color:white}.trainHero p{color:#e4ffd9}.trainGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.8fr);gap:18px}.coverageGrid span{box-shadow:0 6px 14px #0000000c}@media(max-width:1100px){.split,.trainGrid{grid-template-columns:1fr}.mobilePreview{position:static}.mobilePreview iframe{height:520px}}
+
+/* --- visual polish (step: admin revamp) --- */
+body{font-family:'Segoe UI','Noto Sans',system-ui,-apple-system,sans-serif;letter-spacing:.1px}
+h1,h2,h3{letter-spacing:.2px}
+.panel h3,.dataTable h4{border-left:4px solid #ffb000;padding-left:10px;border-radius:2px}
+.stat{position:relative;overflow:hidden;transition:.2s ease}
+.stat::after{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#116530,#84bd00)}
+.stat:hover{transform:translateY(-4px)}
+button{box-shadow:0 6px 16px rgba(17,101,48,.16);letter-spacing:.2px}
+.secondary{box-shadow:0 6px 16px rgba(255,176,0,.25)}
+input,select,textarea{transition:border-color .15s, box-shadow .15s}
+input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(17,101,48,.12)}
+.dataTable tr:nth-child(even) td{background:#fcfffa}
+.dataTable tr:hover td{background:#f4fff0}
+aside a{position:relative}
+aside a.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:4px;border-radius:4px;background:#ffb000}
+.dashHero{position:relative;overflow:hidden}
+.dashHero::before{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.08)}
+.dashHero::after{content:'';position:absolute;right:60px;bottom:-80px;width:180px;height:180px;border-radius:50%;background:rgba(255,176,0,.15)}
+.consoleLog{background:#0b1f10;color:#c9ffd2;border-radius:14px;padding:12px;font-family:ui-monospace,Consolas,monospace;font-size:12px;max-height:520px;min-height:260px;overflow:auto;white-space:pre-wrap;box-shadow:inset 0 0 0 1px rgba(132,189,0,.25)}
+.coverageGrid span{transition:.15s}
+.coverageGrid span:hover{transform:translateY(-2px)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:#bcd6b4;border-radius:8px;border:2px solid #f4fbef}
+::-webkit-scrollbar-track{background:transparent}
+.loginCard{backdrop-filter:blur(6px)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}

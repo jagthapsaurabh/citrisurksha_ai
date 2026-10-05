@@ -24,7 +24,7 @@ from app.datasets import build_dataset, load_manifest  # noqa: E402
 from app.ml import train_classifier  # noqa: E402
 from app.yolo_train import train_yolo  # noqa: E402
 
-CLASSES = ["yellow-citrus-thrips", "citrus-thrips", "cotton-aphid"]
+CLASSES = ["citrus-leaf-miner", "no-citrus-pest", "citrus-thrips", "yellow-citrus-thrips", "oriental-spider-mite", "cotton-aphid"]
 
 
 def collect_records() -> list[dict]:
@@ -40,30 +40,35 @@ def collect_records() -> list[dict]:
 def main() -> int:
     recs = collect_records()
     print("records:", len(recs))
-    manifest = build_dataset(recs, "dataset-drive-v1")
+    manifest = build_dataset(recs, "dataset-drive-v2")
     print("manifest:", {k: manifest[k] for k in ("image_count", "train_count", "val_count", "test_count", "dups_removed")})
 
-    m = load_manifest("dataset-drive-v1")
+    m = load_manifest("dataset-drive-v2")
     train_val = [r for r in recs if m["splits"].get(r["image_id"]) in ("train", "val")]
 
     t0 = time.time()
     cnn = train_classifier({
-        "dataset_version": "dataset-drive-v1", "base_model": "resnet18",
-        "epochs": 3, "batch_size": 4, "image_size": 128,
+        "dataset_version": "dataset-drive-v2", "base_model": "resnet18",
+        "epochs": 8, "batch_size": 8, "image_size": 128,
         "classes": [{"id": c, "name": c.replace("-", " ").title()} for c in CLASSES],
         "training_records": train_val,
     })
     cnn_sec = round(time.time() - t0, 1)
 
+    report_partial = {"cnn": {"status": cnn.get("status"), "version": cnn.get("version"), "accuracy": (cnn.get("metrics") or {}).get("accuracy"), "macro_f1": (cnn.get("metrics") or {}).get("macro_f1")}, "yolo": None}
+    (ROOT / "docs" / "pilot" / "drive_run_report.md").write_text("# Drive training (partial)\n```json\n" + json.dumps(report_partial, indent=2) + "\n```\n", encoding="utf-8")
     t0 = time.time()
-    yolo = train_yolo({"dataset_version": "dataset-drive-v1", "records": recs,
-                       "splits": m["splits"], "epochs": 1, "imgsz": 320, "batch": 4})
+    try:
+        yolo = train_yolo({"dataset_version": "dataset-drive-v2", "records": recs,
+                       "splits": m["splits"], "epochs": 2, "imgsz": 192, "batch": 1})
+    except Exception as exc:
+        yolo = {"status": "failed", "error": str(exc)}
     yolo_sec = round(time.time() - t0, 1)
 
     report = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "purpose": "Experimental transfer-learning run on open-licensed (MIT) proxy classes. NOT production.",
-        "dataset": {"version": "dataset-drive-v1", **{k: manifest[k] for k in
+        "dataset": {"version": "dataset-drive-v2", **{k: manifest[k] for k in
                    ("image_count", "train_count", "val_count", "test_count", "dups_removed")},
                     "classes": CLASSES},
         "cnn": {"status": cnn.get("status"), "version": cnn.get("version"),

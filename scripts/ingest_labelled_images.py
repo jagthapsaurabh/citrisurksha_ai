@@ -52,6 +52,13 @@ def sniff(path: Path) -> str | None:
 
 def ingest(src_dir: Path, dest_root: Path, provenance: Path, dry_run: bool = False) -> dict:
     report: dict = {"classes": {}, "copied": 0, "skipped": [], "dry_run": dry_run}
+    known_shas: set = set()
+    if provenance.exists():
+        for line in provenance.read_text(encoding="utf-8").splitlines():
+            try:
+                known_shas.add(json.loads(line).get("sha256"))
+            except Exception:
+                continue
     for cls_dir in sorted([p for p in src_dir.iterdir() if p.is_dir()]):
         pid = cls_dir.name
         if pid not in KNOWN:
@@ -72,6 +79,9 @@ def ingest(src_dir: Path, dest_root: Path, provenance: Path, dry_run: bool = Fal
                 continue
             seen_hashes.append(h)
             sha = hashlib.sha256(img.read_bytes()).hexdigest()
+            if sha in known_shas:
+                per_class["dupes"] += 1
+                continue
             dest = dest_root / pid / f"ingested_{int(time.time())}_{img.name}"
             if not dry_run:
                 dest.parent.mkdir(parents=True, exist_ok=True)

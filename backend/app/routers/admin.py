@@ -1,4 +1,8 @@
+import json
+import time
 from datetime import datetime
+from pathlib import Path
+
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 import requests
 from sqlalchemy.orm import Session
@@ -409,6 +413,125 @@ def tune_priority_proxy(payload: dict, db: Session = Depends(get_db), _admin: Us
         return r.json()
     except Exception as exc:
         raise HTTPException(status_code=502, detail=f"Tuning failed: {exc}") from exc
+
+
+def _drive_scripts():
+    import importlib.util
+    root = Path(__file__).resolve().parents[3]
+    fetch = importlib.util.module_from_spec(
+        importlib.util.spec_from_file_location("fetch_open_drive", root / "scripts" / "fetch_open_drive.py"))
+    import sys
+    sys.modules.setdefault("fetch_open_drive", fetch)
+    fetch.__spec__.loader.exec_module(fetch)
+    ingest = importlib.util.module_from_spec(
+        importlib.util.spec_from_file_location("ingest_tool", root / "scripts" / "ingest_labelled_images.py"))
+    sys.modules.setdefault("ingest_tool", ingest)
+    ingest.__spec__.loader.exec_module(ingest)
+    return fetch, ingest
+
+
+def _training_images_dir() -> Path:
+    return Path(settings.upload_dir).parent / "training_images"
+
+
+@router.get("/ai/drive/status")
+def drive_status(_admin: User = Depends(require_admin)):
+    """Live view of the open/labelled image drive per pest class."""
+    base = _training_images_dir()
+    prov = base / "provenance.jsonl"
+    prov_rows = 0
+    sources: dict = {}
+    if prov.exists():
+        for line in prov.read_text(encoding="utf-8").splitlines():
+            try:
+                r = json.loads(line)
+                prov_rows += 1
+                key = f"{r.get('source_dataset', 'local')} ({r.get('license', '-')})"
+                sources[key] = sources.get(key, 0) + 1
+            except Exception:
+                continue
+    classes = []
+    for d in sorted(base.iterdir()):
+        if d.is_dir():
+            n = len([f for f in d.glob("*") if "ingested" in f.name])
+            if n or (d / ".keep").exists():
+                classes.append({"pest_id": d.name, "images": n})
+    return {"classes": classes, "provenance_records": prov_rows, "sources": sources}
+
+
+@router.post("/ai/drive/fetch")
+def drive_fetch(payload: dict | None = None, _admin: User = Depends(require_admin)):
+    """Fetch open-licensed transfer images (MIT / Apache-2.0) and ingest them
+    with dedupe + provenance. Small per_class keeps the call inside timeouts."""
+    fetch, ingest = _drive_scripts()
+    per = int((payload or {}).get("per_class", 4))
+    src = (payload or {}).get("source", "all")
+    src_dir = _training_images_dir() / ".drive_src"
+    src_dir.mkdir(parents=True, exist_ok=True)
+    prov: list = []
+    out = {"leafminer": None, "ip102": None}
+    if src in ("leafminer", "all"):
+        out["leafminer"] = fetch.fetch_leafminer(src_dir, per, prov)
+    if src in ("ip102", "all"):
+        out["ip102"] = fetch.fetch_ip102(src_dir, per, prov, offset=int((payload or {}).get("offset", 0)),
+                                         max_pages=int((payload or {}).get("max_pages", 12)))
+    rep = ingest.ingest(src_dir, _training_images_dir(), _training_images_dir() / "provenance.jsonl")
+    return {"fetched": out, "ingested": rep.get("copied"), "classes": rep.get("classes")}
+
+
+@router.post("/ai/drive/train-cnn")
+def drive_train_cnn(payload: dict | None = None, _admin: User = Depends(require_admin)):
+    """Experimental CNN training on the drive images (transfer classes)."""
+    base = _training_images_dir()
+    records = []
+    classes = []
+    for d in sorted(base.iterdir()):
+        if not d.is_dir() or d.name.startswith("."):
+            continue
+        files = [f for f in sorted(d.glob("*")) if "ingested" in f.name]
+        if not files:
+            continue
+        classes.append({"id": d.name, "name": d.name.replace("-", " ").title()})
+        for f in files:
+            records.append({"image_id": f.stem, "image_path": str(f), "pest_id": d.name})
+    body = {
+        "dataset_version": (payload or {}).get("dataset_version") or f"drive-{time.strftime('%Y%m%d-%H%M')}",
+        "base_model": (payload or {}).get("base_model", "resnet18"),
+        "epochs": int((payload or {}).get("epochs", 8)),
+        "batch_size": int((payload or {}).get("batch_size", 8)),
+        "image_size": 128,
+        "classes": classes,
+        "training_records": records,
+        "experimental": True,
+    }
+    try:
+        r = requests.post(f"{settings.ai_service_url}/train/jobs", json=body, timeout=900)
+        r.raise_for_status()
+        return r.json()
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"CNN training failed: {exc}") from exc
+
+
+@router.post("/ai/drive/train-yolo")
+def drive_train_yolo(payload: dict | None = None, _admin: User = Depends(require_admin)):
+    """Experimental bootstrap YOLO training on the drive images."""
+    base = _training_images_dir()
+    records = []
+    for d in sorted(base.iterdir()):
+        if not d.is_dir() or d.name.startswith("."):
+            continue
+        for f in sorted(d.glob("*")):
+            if "ingested" in f.name:
+                records.append({"image_id": f.stem, "image_path": str(f), "pest_id": d.name})
+    body = {"dataset_version": (payload or {}).get("dataset_version") or f"drive-yolo-{time.strftime('%Y%m%d-%H%M')}",
+            "records": records, "epochs": int((payload or {}).get("epochs", 2)),
+            "imgsz": int((payload or {}).get("imgsz", 192)), "batch": 1}
+    try:
+        r = requests.post(f"{settings.ai_service_url}/train/yolo", json=body, timeout=1800)
+        r.raise_for_status()
+        return r.json()
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"YOLO training failed: {exc}") from exc
 
 
 @router.get("/ai/review-queue")

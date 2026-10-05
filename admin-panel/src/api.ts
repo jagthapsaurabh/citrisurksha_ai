@@ -83,4 +83,8 @@ export const api = {
   reviewQueue: () => req('/admin/ai/review-queue'),
   unknownClusters: () => req('/admin/ai/unknown-clusters'),
   tunePriority: () => req('/admin/ai/tune-priority', { method: 'POST', body: '{}' }),
+  driveStatus: () => req('/admin/ai/drive/status'),
+  driveFetch: (p: any) => req('/admin/ai/drive/fetch', { method: 'POST', body: JSON.stringify(p || {}) }),
+  driveTrainCnn: (p: any) => req('/admin/ai/drive/train-cnn', { method: 'POST', body: JSON.stringify(p || {}) }),
+  driveTrainYolo: (p: any) => req('/admin/ai/drive/train-yolo', { method: 'POST', body: JSON.stringify(p || {}) }),
 };

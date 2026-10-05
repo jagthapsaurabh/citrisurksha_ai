@@ -178,7 +178,13 @@ def train_classifier(payload: dict) -> dict:
     required_pest_ids = [c["id"] for c in DEFAULT_CLASSES if c["id"] != NEGATIVE_CLASS_ID]
     missing_required = [cid for cid in required_pest_ids if counts.get(cid, 0) == 0]
     low_sample_classes = [cid for cid in required_pest_ids if 0 < counts.get(cid, 0) < int(os.getenv("MIN_IMAGES_PER_PEST", "1"))]
-    if len(records) < 4 or len(counts) < 2 or (missing_required and os.getenv("STRICT_20_CLASS_TRAINING", "true").lower() in {"1", "true", "yes"}):
+    experimental = bool(payload.get("experimental"))
+    strict = os.getenv("STRICT_20_CLASS_TRAINING", "true").lower() in {"1", "true", "yes"}
+    if experimental:
+        # Development runs on transfer data: relax the 20-class gate but keep a
+        # minimum-data sanity check; such models are never 'production' material.
+        strict = False
+    if len(records) < 4 or len(counts) < 2 or (missing_required and strict):
         return {
             "status": "needs_more_data",
             "metrics": {

@@ -11,6 +11,7 @@ const allNav = [
   ['/farmer-uploads', '🖼️', 'Farmer Uploads', ['admin','agronomist','data_labeler']],
   ['/blogs', '📰', 'Blog', ['admin','support']],
   ['/train-ai', '🧠', 'Train AI', ['admin','data_labeler','agronomist']],
+  ['/drive-studio', '🚚', 'Data Drive', ['admin','data_labeler','agronomist']],
   ['/ai-models', '🤖', 'AI Models', ['admin','data_labeler','agronomist']],
   ['/events', '📅', 'Events', ['admin','support']],
   ['/calendar-operation', '🗓️', 'Calendar of Operation', ['admin','agronomist','support']],
