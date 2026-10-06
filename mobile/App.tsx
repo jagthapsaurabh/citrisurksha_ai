@@ -88,6 +88,7 @@ function DashboardTabs({ onLogout }: { onLogout: () => void }) {
 }
 
 export default function App() {
+  const { t } = useI18n();
   const [splash, setSplash] = useState(true);
   const [authed, setAuthed] = useState(false);
   useEffect(() => { const t = setTimeout(() => setSplash(false), 1000); return () => clearTimeout(t); }, []);
@@ -102,17 +103,17 @@ export default function App() {
         <RootStack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#116530' }, headerTintColor: 'white', headerTitleStyle: { fontWeight: '900' } }}>
           {authed ? <>
             <RootStack.Screen name="Dashboard" options={{ headerShown: false }}>{() => <DashboardTabs onLogout={logout} />}</RootStack.Screen>
-            <RootStack.Screen name="History" component={HistoryScreen} options={{ title: 'Detection History' }} />
-            <RootStack.Screen name="DetectionDetail" component={DetectionDetailScreen} options={{ title: 'Detection Result' }} />
-            <RootStack.Screen name="Calendar" component={CalendarScreen} options={{ title: 'Calendar of Operation' }} />
-            <RootStack.Screen name="Blog" component={BlogScreen} options={{ title: 'Blog & Advisory' }} />
-            <RootStack.Screen name="BlogDetail" component={BlogDetailScreen} options={{ title: 'Blog Details' }} />
-            <RootStack.Screen name="About" component={AboutScreen} options={{ title: 'About App' }} />
-            <RootStack.Screen name="Terms" component={TermsScreen} options={{ title: 'Terms & Conditions' }} />
-            <RootStack.Screen name="Events" component={EventScreen} options={{ title: 'Events & Alerts' }} />
-            <RootStack.Screen name="Chat" component={ChatScreen} options={{ title: 'Farmer Chat' }} />
-            <RootStack.Screen name="Insecticides" component={InsecticidesScreen} options={{ title: 'Recommended insecticides' }} />
-            <RootStack.Screen name="Notifications" component={NotificationScreen} options={{ title: 'Notifications' }} />
+            <RootStack.Screen name="History" component={HistoryScreen} options={{ title: t('titleHistory') }} />
+            <RootStack.Screen name="DetectionDetail" component={DetectionDetailScreen} options={{ title: t('titleDetection') }} />
+            <RootStack.Screen name="Calendar" component={CalendarScreen} options={{ title: t('calendarOperation') }} />
+            <RootStack.Screen name="Blog" component={BlogScreen} options={{ title: t('titleBlog') }} />
+            <RootStack.Screen name="BlogDetail" component={BlogDetailScreen} options={{ title: t('titleBlogDetail') }} />
+            <RootStack.Screen name="About" component={AboutScreen} options={{ title: t('aboutApp') }} />
+            <RootStack.Screen name="Terms" component={TermsScreen} options={{ title: t('termsTitle') }} />
+            <RootStack.Screen name="Events" component={EventScreen} options={{ title: t('eventsAlerts') }} />
+            <RootStack.Screen name="Chat" component={ChatScreen} options={{ title: t('farmerChat') }} />
+            <RootStack.Screen name="Insecticides" component={InsecticidesScreen} options={{ title: t('insecticidesTitle') }} />
+            <RootStack.Screen name="Notifications" component={NotificationScreen} options={{ title: t('notificationsTitle') }} />
           </> : <>
             <RootStack.Screen name="Login" options={{ headerShown: false }}>{(props) => <LoginScreen {...props} onLogin={() => setAuthed(true)} />}</RootStack.Screen>
             <RootStack.Screen name="Register" options={{ headerShown: false }}>{(props) => <RegisterScreen {...props} onRegister={() => setAuthed(true)} />}</RootStack.Screen>

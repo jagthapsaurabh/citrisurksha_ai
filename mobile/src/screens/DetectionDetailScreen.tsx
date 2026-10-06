@@ -11,25 +11,27 @@ export function DetectionDetailScreen({ route }: any) {
   const [loading, setLoading] = useState(Boolean(id && !item));
   useEffect(() => {
     if (!id) return;
-    api.detection(id).then(setData).catch((e) => Alert.alert('Could not load result', e.message)).finally(() => setLoading(false));
+    api.detection(id).then(setData).catch((e) => Alert.alert(t('loadFailed'), e.message)).finally(() => setLoading(false));
   }, [id]);
   async function sendFeedback(isCorrect: boolean) {
     try {
       await api.feedback(data.id, { is_correct: isCorrect, comment: isCorrect ? 'Farmer marked correct' : 'Farmer says result may be wrong' });
-      Alert.alert('Thank you', isCorrect ? 'Feedback saved.' : 'Feedback saved for expert review.');
-    } catch (e: any) { Alert.alert('Feedback failed', e.message); }
+      Alert.alert(t('thanks'), isCorrect ? t('fbSaved') : t('fbReview'));
+    } catch (e: any) { Alert.alert(t('fbFailed'), e.message); }
   }
   if (loading) return <Screen><ActivityIndicator color="#116530" size="large" /></Screen>;
   const p = data?.pest_details;
+  const sevKey: Record<string, string> = { high: 'sevHigh', medium: 'sevMedium', low: 'sevLow', preliminary: 'sevPreliminary', none: 'sevNone' };
+  const sevText = (v?: string) => (v && sevKey[v] ? t(sevKey[v]) : v ?? '-');
   return <Screen>
     <Text style={styles.h1}>{t('fullResult')}</Text>
     {data?.image_url && <Image source={{ uri: mediaUrl(data.image_url) }} style={styles.photo} />}
     <View style={styles.card}>
       <Text style={styles.name}>{pestField(data?.pest_details || data?.pest_id, 'name', data?.predicted_name)}</Text>
       <Text style={styles.meta}>{t('stage')}: {data?.stage ?? '-'}</Text>
-      <Text style={styles.badge}>{data?.corrected_by_admin ? 'Corrected by admin/agronomist' : `Status: ${data?.admin_status ?? 'unreviewed'}`}</Text>
-      {data?.severity_level ? <Text style={styles.severity}>{t('severity')}: {data.severity_level}</Text> : null}
-      {data?.admin_note ? <Text style={styles.note}>Admin note: {data.admin_note}</Text> : null}
+      <Text style={styles.badge}>{data?.corrected_by_admin ? t('correctedBy') : `${t('statusLbl')}: ${data?.admin_status ?? 'unreviewed'}`}</Text>
+      {data?.severity_level ? <Text style={styles.severity}>{t('severity')}: {sevText(data.severity_level)}</Text> : null}
+      {data?.admin_note ? <Text style={styles.note}>{t('adminNote')}: {data.admin_note}</Text> : null}
       <View style={styles.feedbackRow}><Pressable style={styles.yes} onPress={() => sendFeedback(true)}><Text style={styles.fbText}>✓ {t('correct')}</Text></Pressable><Pressable style={styles.no} onPress={() => sendFeedback(false)}><Text style={styles.fbText}>✕ {t('wrong')}</Text></Pressable></View>
     </View>
     {p && <View style={styles.card}>

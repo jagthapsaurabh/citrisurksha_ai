@@ -15,20 +15,22 @@ export function DetectScreen({ navigation }: any) {
   async function pick(source: 'camera' | 'gallery') {
     try {
       const perm = source === 'camera' ? await ImagePicker.requestCameraPermissionsAsync() : await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (!perm.granted) return Alert.alert('Permission needed', 'Please allow access from phone settings.');
+      if (!perm.granted) return Alert.alert(t('scanPest'), t('checkDetails'));
       const res = source === 'camera'
         ? await ImagePicker.launchCameraAsync({ quality: 0.85 })
         : await ImagePicker.launchImageLibraryAsync({ quality: 0.85, mediaTypes: ['images'] });
       if (!res.canceled) { setUri(res.assets[0].uri); setResult(null); await detect(res.assets[0].uri, source); }
-    } catch (e: any) { Alert.alert('Image error', e.message || 'Could not open image picker.'); }
+    } catch (e: any) { Alert.alert(t('scanPest'), e.message || t('loadFailed')); }
   }
-  async function detect(photoUri: string, source: 'camera' | 'gallery') {
+  async function detect(photoUri: string, source: 'gallery' | 'camera') {
     try { setLoading(true); setResult(await api.detect(photoUri, source)); setManageTab('preventive'); }
-    catch (e: any) { Alert.alert('Detection failed', e.message || 'Server error. Please try again.'); }
+    catch (e: any) { Alert.alert(t('loadFailed'), e.message || t('checkDetails')); }
     finally { setLoading(false); }
   }
   const p = result?.pest_details;
   const isPest = result?.prediction?.is_citrus_pest !== false && !!p;
+  const sevKey: Record<string, string> = { high: 'sevHigh', medium: 'sevMedium', low: 'sevLow', preliminary: 'sevPreliminary', none: 'sevNone' };
+  const sevText = (v?: string) => (v && sevKey[v] ? t(sevKey[v]) : v ?? '-');
   return <Screen>
     <Text style={styles.h1}>{t('scanCitrusPest')}</Text>
     <Text style={styles.help}>{t('scanHelp')}</Text>
@@ -39,8 +41,8 @@ export function DetectScreen({ navigation }: any) {
     {uri && <Image source={{ uri }} style={styles.preview} />}
     {loading && <View style={styles.loading}><ActivityIndicator size="large" color="#116530" /><Text style={styles.help}>{t('aiChecking')}</Text></View>}
     {result && <View style={styles.report}>
-      <Text style={styles.reportTitle}>{isPest ? pestField(p, 'name', result.prediction.pest_name) : 'No citrus pest detected'}</Text>
-      {isPest ? <Text style={styles.meta}>{t('severity')}: {result.prediction.severity_level ?? '-'}</Text> : null}
+      <Text style={styles.reportTitle}>{isPest ? pestField(p, 'name', result.prediction.pest_name) : t('noPest').split('.')[0]}</Text>
+      {isPest ? <Text style={styles.meta}>{t('severity')}: {sevText(result.prediction.severity_level)} · {t('stage')}: {result.prediction.stage ?? '-'}</Text> : null}
       <Text style={result.prediction.is_citrus_pest === false ? styles.notPest : styles.message}>{result.prediction.is_citrus_pest === false ? t('noPest') : result.message}</Text>
       {isPest && <>
         <Text style={styles.section}>{t('symptoms')}</Text><Text>{pestField(p, 'symptoms', p.symptoms)}</Text>

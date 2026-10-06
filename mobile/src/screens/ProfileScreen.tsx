@@ -1,37 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { api } from '../api/client';
-import { Screen } from '../components/Screen';
 import { Lang, useI18n } from '../i18n';
-
-const FIELDS = [
-  ['name', 'Full Name'], ['email', 'Email'], ['village', 'Village'], ['district', 'District'], ['state', 'State'], ['address', 'Address'],
-  ['acres_land', 'Land in acres'], ['plants', 'Plants/Crops you have'], ['citrus_varieties', 'Citrus varieties'], ['irrigation_type', 'Irrigation type'], ['farming_experience_years', 'Farming experience years'],
-];
+import { Screen } from '../components/Screen';
 
 export function ProfileScreen({ navigation, onLogout }: any) {
   const { lang, setLang, t } = useI18n();
   const [profile, setProfile] = useState<any>({});
   const [saving, setSaving] = useState(false);
   const [editing, setEditing] = useState(false);
-  useEffect(() => { api.me().then((p) => { setProfile(p); if (['en','mr','hi'].includes(p.language)) setLang(p.language as Lang); }).catch((e) => Alert.alert('Profile error', e.message)); }, []);
+  useEffect(() => { api.me().then((p) => { setProfile(p); if (['en','mr','hi'].includes(p.language)) setLang(p.language as Lang); }).catch((e) => Alert.alert(t('profileError'), e.message)); }, []);
   function setField(k: string, v: string) { setProfile((p: any) => ({ ...p, [k]: v })); }
   async function save() {
     try {
       setSaving(true);
       const payload = { ...profile, acres_land: profile.acres_land ? Number(profile.acres_land) : null, farming_experience_years: profile.farming_experience_years ? Number(profile.farming_experience_years) : null };
       const updated = await api.updateProfile(payload); setProfile(updated); setEditing(false);
-      Alert.alert('Saved', 'Profile updated successfully.');
-    } catch (e: any) { Alert.alert('Could not save profile', e.message); }
+      Alert.alert(t('saved'), t('profileUpdated'));
+    } catch (e: any) { Alert.alert(t('couldNotSave'), e.message); }
     finally { setSaving(false); }
   }
-  function confirmLogout() { Alert.alert(t('logout'), 'Are you sure you want to logout?', [{ text: 'Cancel', style: 'cancel' }, { text: 'Yes', style: 'destructive', onPress: onLogout }]); }
+  function confirmLogout() { Alert.alert(t('logout'), t('logoutConfirm'), [{ text: t('cancel'), style: 'cancel' }, { text: t('yes'), style: 'destructive', onPress: onLogout }]); }
+  const FIELDS: [string, string][] = [
+    ['name', t('fName')], ['email', t('fEmail')], ['village', t('fVillage')], ['district', t('fDistrict')], ['state', t('fState')], ['address', t('fAddress')],
+    ['acres_land', t('fAcres')], ['plants', t('fPlants')], ['citrus_varieties', t('fVarieties')], ['irrigation_type', t('fIrrigation')], ['farming_experience_years', t('fExperience')],
+  ];
   return <Screen>
-    <View style={styles.topCard}><Text style={styles.avatar}>👨‍🌾</Text><View style={{ flex: 1 }}><Text style={styles.name}>{profile.name ?? 'Farmer'}</Text><Text style={styles.meta}>{profile.phone}</Text><Text style={styles.badge}>{profile.profile_completed ? t('profileComplete') : t('completeProfile')}</Text></View></View>
+    <View style={styles.topCard}><Text style={styles.avatar}>👨‍🌾</Text><View style={{ flex: 1 }}><Text style={styles.name}>{profile.name ?? t('profileTitle')}</Text><Text style={styles.meta}>{profile.phone}</Text><Text style={styles.badge}>{profile.profile_completed ? t('profileComplete') : t('completeProfile')}</Text></View></View>
     <Text style={styles.section}>{t('language')}</Text>
-    <View style={styles.langRow}>{(['en','mr','hi'] as Lang[]).map(l => <Pressable key={l} onPress={async () => { try { setLang(l); setField('language', l); setProfile(await api.updateProfile({ language: l })); } catch(e:any){ Alert.alert('Language update failed', e.message); } }} style={[styles.langChip, (profile.language || lang) === l && styles.langChipActive]}><Text style={(profile.language || lang) === l ? styles.langTextActive : styles.langText}>{l === 'en' ? t('english') : l === 'mr' ? t('marathi') : t('hindi')}</Text></Pressable>)}</View>
-    <View style={styles.sectionRow}><Text style={styles.section}>{t('farmDetails')}</Text><Pressable style={styles.editBtn} onPress={() => setEditing(!editing)}><Text style={styles.editText}>{editing ? 'Cancel' : 'Edit'}</Text></Pressable></View>
-    {!editing ? <View style={styles.summary}>{FIELDS.map(([key,label]) => <Text key={key} style={styles.summaryText}><Text style={styles.bold}>{label}: </Text>{profile[key] == null || profile[key] === '' ? 'Not available' : String(profile[key])}</Text>)}</View> : <>{FIELDS.map(([key, label]) => <View key={key}><Text style={styles.label}>{label}</Text><TextInput style={[styles.input, key === 'address' || key === 'plants' ? styles.multi : null]} value={profile[key] == null ? '' : String(profile[key])} onChangeText={(v) => setField(key, v)} placeholder={label} keyboardType={key.includes('acres') || key.includes('years') ? 'numeric' : 'default'} multiline={key === 'address' || key === 'plants'} /></View>)}<Pressable style={styles.save} onPress={save}><Text style={styles.saveText}>{saving ? 'Saving...' : t('updateProfile')}</Text></Pressable></>}
+    <View style={styles.langRow}>{(['en','mr','hi'] as Lang[]).map(l => <Pressable key={l} onPress={async () => { try { setLang(l); setField('language', l); setProfile(await api.updateProfile({ language: l })); } catch(e:any){ Alert.alert(t('langUpdateFailed'), e.message); } }} style={[styles.langChip, (profile.language || lang) === l && styles.langChipActive]}><Text style={(profile.language || lang) === l ? styles.langTextActive : styles.langText}>{l === 'en' ? t('english') : l === 'mr' ? t('marathi') : t('hindi')}</Text></Pressable>)}</View>
+    <View style={styles.sectionRow}><Text style={styles.section}>{t('farmDetails')}</Text><Pressable style={styles.editBtn} onPress={() => setEditing(!editing)}><Text style={styles.editText}>{editing ? t('cancel') : t('edit')}</Text></Pressable></View>
+    {!editing ? <View style={styles.summary}>{FIELDS.map(([key,label]) => <Text key={key} style={styles.summaryText}><Text style={styles.bold}>{label}: </Text>{profile[key] == null || profile[key] === '' ? t('notAvailable') : String(profile[key])}</Text>)}</View> : <>{FIELDS.map(([key, label]) => <View key={key}><Text style={styles.label}>{label}</Text><TextInput style={[styles.input, key === 'address' || key === 'plants' ? styles.multi : null]} value={profile[key] == null ? '' : String(profile[key])} onChangeText={(v) => setField(key, v)} placeholder={label} keyboardType={key.includes('acres') || key.includes('years') ? 'numeric' : 'default'} multiline={key === 'address' || key === 'plants'} /></View>)}<Pressable style={styles.save} onPress={save}><Text style={styles.saveText}>{saving ? t('saving') : t('updateProfile')}</Text></Pressable></>}
     <Text style={styles.section}>{t('more')}</Text>
     <Pressable style={styles.row} onPress={() => navigation.getParent()?.navigate('About')}><Text style={styles.rowText}>ℹ️ {t('aboutApp')}</Text><Text>›</Text></Pressable>
     <Pressable style={styles.row} onPress={() => navigation.getParent()?.navigate('Terms')}><Text style={styles.rowText}>📜 {t('terms')}</Text><Text>›</Text></Pressable>

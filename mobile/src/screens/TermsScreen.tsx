@@ -1,16 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Screen } from '../components/Screen';
+import { useI18n } from '../i18n';
 
 export function TermsScreen() {
+  const { t } = useI18n();
   return <Screen>
     <View style={styles.card}>
-      <Text style={styles.title}>Terms & Conditions</Text>
-      <Text style={styles.point}>1. CitriSurksha AI results are advisory and should be verified by an agriculture expert for severe infestations.</Text>
-      <Text style={styles.point}>2. Follow local agriculture department guidance, pesticide labels, PPE requirements and pre-harvest intervals.</Text>
-      <Text style={styles.point}>3. Uploaded images may be reviewed by authorised admins/agronomists to improve service quality.</Text>
-      <Text style={styles.point}>4. Farmer images are not used for AI training unless approved through the admin review workflow.</Text>
-      <Text style={styles.point}>5. Keep your profile and farm details accurate to receive better recommendations.</Text>
+      <Text style={styles.title}>{t('termsTitle')}</Text>
+      <Text style={styles.point}>{t('terms1')}</Text>
+      <Text style={styles.point}>{t('terms2')}</Text>
+      <Text style={styles.point}>{t('terms3')}</Text>
+      <Text style={styles.point}>{t('terms4')}</Text>
+      <Text style={styles.point}>{t('terms5')}</Text>
     </View>
   </Screen>;
 }

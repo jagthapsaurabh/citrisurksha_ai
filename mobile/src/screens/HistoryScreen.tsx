@@ -6,9 +6,10 @@ import { Screen } from '../components/Screen';
 import { useI18n } from '../i18n';
 
 export function HistoryScreen({ navigation }: any) {
-  const { t, pestField } = useI18n(); const [items, setItems] = useState<any[]>([]); const [refreshing, setRefreshing] = useState(false);
+  const { t, pestField, fmtDate } = useI18n(); const [items, setItems] = useState<any[]>([]); const [refreshing, setRefreshing] = useState(false);
   const load = useCallback(async () => { setRefreshing(true); try { setItems(await api.history()); } finally { setRefreshing(false); } }, []);
   useFocusEffect(useCallback(() => { load(); }, [load]));
+  const statusText = (item: any) => item.corrected_by_admin ? t('statusCorrected') : item.admin_status === 'unreviewed' || !item.admin_status ? t('statusPending') : item.admin_status;
   return <Screen>
     <Text style={styles.h1}>{t('detectionHistory')}</Text>
     <Text style={styles.help}>{t('historyHelp')}</Text>
@@ -17,12 +18,12 @@ export function HistoryScreen({ navigation }: any) {
       <View style={{ flex: 1 }}>
         <Text style={styles.name}>{pestField(item.pest_details || item.pest_id, 'name', item.predicted_name)}</Text>
         <Text style={styles.meta}>{t('stage')}: {item.stage ?? '-'}</Text>
-        <Text style={styles.status}>{item.corrected_by_admin ? 'Corrected by admin' : item.admin_status}</Text>
-        <Text style={styles.date}>{new Date(item.created_at).toLocaleString()}</Text>
+        <Text style={styles.status}>{statusText(item)}</Text>
+        <Text style={styles.date}>{fmtDate(item.created_at)}</Text>
       </View>
       <Text style={styles.chev}>›</Text>
     </Pressable>)}
-    {items.length === 0 && <View style={styles.empty}><Text style={styles.emptyText}>No detections yet. Use Scan to detect your first pest.</Text></View>}
+    {items.length === 0 && <View style={styles.empty}><Text style={styles.emptyText}>{t('noDetections')}</Text></View>}
   </Screen>;
 }
 const styles = StyleSheet.create({
