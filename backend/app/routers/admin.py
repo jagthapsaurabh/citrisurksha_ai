@@ -714,7 +714,7 @@ def list_training_jobs(db: Session = Depends(get_db), _admin: User = Depends(req
 @router.get("/blogs")
 def admin_list_blogs(db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
     rows = db.query(BlogPost).order_by(BlogPost.created_at.desc()).limit(300).all()
-    return [{"id": b.id, "title": b.title, "summary": b.summary, "body": b.body, "language": b.language, "published": b.published, "image_url": b.image_url, "doc_url": b.doc_url, "content_type": b.content_type, "author_name": b.author_name, "views_count": b.views_count or 0, "likes_count": db.query(BlogLike).filter(BlogLike.blog_id == b.id).count(), "comments_count": db.query(BlogComment).filter(BlogComment.blog_id == b.id).count(), "created_at": b.created_at} for b in rows]
+    return [{"id": b.id, "title": b.title, "summary": b.summary, "body": b.body, "language": b.language, "published": b.published, "image_url": b.image_url, "doc_url": b.doc_url, "content_type": b.content_type, "author_name": b.author_name, "translations": b.translations or {}, "views_count": b.views_count or 0, "likes_count": db.query(BlogLike).filter(BlogLike.blog_id == b.id).count(), "comments_count": db.query(BlogComment).filter(BlogComment.blog_id == b.id).count(), "created_at": b.created_at} for b in rows]
 
 @router.post("/blogs")
 def create_blog(payload: BlogIn, db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
@@ -747,14 +747,14 @@ def delete_blog(blog_id: str, db: Session = Depends(get_db), _admin: User = Depe
 @router.get("/calendar")
 def admin_list_calendar(db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
     rows = db.query(CalendarEvent).order_by(CalendarEvent.month).all()
-    return [{"id": r.id, "month": r.month, "title": r.title, "description": r.description, "region": r.region} for r in rows]
+    return [{"id": r.id, "month": r.month, "title": r.title, "description": r.description, "region": r.region, "translations": r.translations or {}} for r in rows]
 
 @router.get("/calendar/{event_id}")
 def admin_get_calendar(event_id: str, db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
     row = db.get(CalendarEvent, event_id)
     if not row:
         raise HTTPException(status_code=404, detail="Calendar operation not found")
-    return {"id": row.id, "month": row.month, "title": row.title, "description": row.description, "region": row.region}
+    return {"id": row.id, "month": row.month, "title": row.title, "description": row.description, "region": row.region, "translations": row.translations or {}}
 
 @router.post("/calendar")
 def upsert_calendar_event(payload: CalendarEventIn, db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
@@ -790,7 +790,7 @@ def delete_calendar_event(event_id: str, db: Session = Depends(get_db), _admin: 
 @router.get("/events")
 def list_events(db: Session = Depends(get_db), _admin: User = Depends(require_admin)):
     rows = db.query(PlatformEvent).order_by(PlatformEvent.created_at.desc()).limit(300).all()
-    return [{"id": e.id, "title": e.title, "description": e.description, "event_date": e.event_date, "region": e.region, "send_notification": e.send_notification, "published": e.published, "created_at": e.created_at} for e in rows]
+    return [{"id": e.id, "title": e.title, "description": e.description, "event_date": e.event_date, "region": e.region, "send_notification": e.send_notification, "published": e.published, "translations": e.translations or {}, "created_at": e.created_at} for e in rows]
 
 @router.post("/events")
 def create_event(payload: PlatformEventIn, db: Session = Depends(get_db), _admin: User = Depends(require_admin)):

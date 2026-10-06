@@ -5,6 +5,7 @@ from ..db import get_db
 from ..models import CalendarEvent, Pest
 from ..schemas import PestOut
 from ..security import get_current_user
+from ..localize import merge_lang
 
 router = APIRouter(prefix="/pests", tags=["pests"])
 
@@ -19,9 +20,9 @@ def list_pests(db: Session = Depends(get_db), _=Depends(get_current_user)):
     return result
 
 @router.get("/calendar/year")
-def citrus_calendar(region: str = "India", db: Session = Depends(get_db), _=Depends(get_current_user)):
+def citrus_calendar(region: str = "India", language: str = "en", db: Session = Depends(get_db), _=Depends(get_current_user)):
     rows = db.query(CalendarEvent).filter(CalendarEvent.region == region).order_by(CalendarEvent.month).all()
-    return [{"month": r.month, "title": r.title, "description": r.description, "region": r.region} for r in rows]
+    return [merge_lang({"month": r.month, "title": r.title, "description": r.description, "region": r.region}, r.translations, language, ["title", "description"]) for r in rows]
 
 @router.get("/{pest_id}", response_model=PestOut)
 def get_pest(pest_id: str, db: Session = Depends(get_db), _=Depends(get_current_user)):

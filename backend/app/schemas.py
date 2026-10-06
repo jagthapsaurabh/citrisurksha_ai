@@ -86,6 +86,7 @@ class CalendarEventIn(BaseModel):
     title: str
     description: str
     region: str = "India"
+    translations: dict = {}
 
 class FcmTokenIn(BaseModel):
     token: str
@@ -138,6 +139,7 @@ class BlogIn(BaseModel):
     doc_url: str | None = None
     content_type: str = "html"
     author_name: str | None = None
+    translations: dict = {}
 
 class AdminUserIn(BaseModel):
     name: str
@@ -170,6 +172,7 @@ class PlatformEventIn(BaseModel):
     region: str = "India"
     send_notification: bool = True
     published: bool = True
+    translations: dict = {}
 
 class ChatMessageIn(BaseModel):
     message: str

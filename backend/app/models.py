@@ -83,6 +83,7 @@ class BlogPost(Base):
     doc_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
     content_type: Mapped[str] = mapped_column(String(20), default="html")
     author_name: Mapped[str | None] = mapped_column(String(180), nullable=True)
+    translations: Mapped[dict] = mapped_column(JSON, default=dict)
     views_count: Mapped[int] = mapped_column(Integer, default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
@@ -93,6 +94,7 @@ class CalendarEvent(Base):
     title: Mapped[str] = mapped_column(String(200))
     description: Mapped[str] = mapped_column(Text)
     region: Mapped[str] = mapped_column(String(120), default="India")
+    translations: Mapped[dict] = mapped_column(JSON, default=dict)
 
 class InsecticideRecommendation(Base):
     __tablename__ = "insecticide_recommendations"
@@ -163,6 +165,7 @@ class PlatformEvent(Base):
     region: Mapped[str] = mapped_column(String(120), default="India")
     send_notification: Mapped[bool] = mapped_column(Boolean, default=True)
     published: Mapped[bool] = mapped_column(Boolean, default=True)
+    translations: Mapped[dict] = mapped_column(JSON, default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 class ChatConversation(Base):

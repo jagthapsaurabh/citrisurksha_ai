@@ -213,9 +213,30 @@ def seed_data(db: Session):
             db.add(AiKnowledgeItem(title=title, content=f"Dataset URL: {src['url']}\nSuitable for: {src['suitable_for']}\nUse only after license review and local download/curation.", source_type="dataset", url=src["url"], pest_id=None, metadata_json=src))
     db.commit()
 
+def ensure_translation_columns():
+    """Idempotent additive migration for existing SQLite/Postgres databases."""
+    from sqlalchemy import inspect as sa_inspect, text
+    insp = sa_inspect(engine)
+    specs = {
+        "blog_posts": "ALTER TABLE blog_posts ADD COLUMN translations JSON",
+        "calendar_events": "ALTER TABLE calendar_events ADD COLUMN translations JSON",
+        "platform_events": "ALTER TABLE platform_events ADD COLUMN translations JSON",
+    }
+    with engine.begin() as conn:
+        for table, ddl in specs.items():
+            if table in insp.get_table_names():
+                cols = [c["name"] for c in insp.get_columns(table)]
+                if "translations" not in cols:
+                    try:
+                        conn.execute(text(ddl))
+                    except Exception:
+                        pass
+
+
 @app.on_event("startup")
 def startup():
     Base.metadata.create_all(bind=engine)
+    ensure_translation_columns()
     ensure_lightweight_migrations()
     db = SessionLocal()
     try:
